@@ -58,6 +58,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+source ~/.nvm/nvm.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -101,3 +102,5 @@ alias linkwechat="autossh -M 2132 root@shimoweixin.oicp.net -N -R 9001:localhost
 alias mcoding="mvim /Users/Sunny/Workspace/cow/startup.js"
 alias coding="vim /Users/Sunny/Workspace/cow/startup.js"
 alias vim='/opt/local/vim74/bin/vim'
+alias tmuxrc='vim ~/.tmux.conf'
+alias appfolder='open $(getconf DARWIN_USER_CACHE_DIR)/com.apple.appstore'

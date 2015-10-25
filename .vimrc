@@ -11,6 +11,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 " colors
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'kristijanhusak/vim-hybrid-material'
+Plugin 'gilgigilgil/anderson.vim'
+Plugin 'w0ng/vim-hybrid'
 
 Plugin 'ctrlp.vim'
 " from github
@@ -40,7 +44,8 @@ Plugin 'tpope/vim-fugitive'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-set guifont=Source\ Code\ Pro:h10
+"set guifont=Source\ Code\ Pro:h10
+set guifont=Input\ Mono:h10
 set number "显示行号
 "set guitablabel=\[%N\]\ %t\ %M 
 "set autochdir " 自动切换当前目录为当前文件所在的目录
@@ -80,19 +85,42 @@ let g:indent_guides_start_level = 1
 " 设置配色方案
 " =============================
 syntax enable
-colorscheme solarized
-if has('gui_running')
+"colorscheme solarized
+"if has('gui_running')
 	"set background=light"设置为浅色
-	set background=light
-else
-	set background=light
-endif
-let g:solarized_termcolors=256
+	"set background=dark
+"else
+	"set background=light
+"endif
+"let g:solarized_termcolors=256
+
+" molokai
+" colorscheme molokai
+"let g:molokai_original = 1
+"let g:rehash256 = 1
+
+" hybrid_material
+" colorscheme hybrid_material
+" let g:enable_bold_font = 1
+
+" anderson
+"if has('gui_running')
+"  colorscheme anderson
+"else
+"  colorscheme hybrid_material
+"endif
+
+colorscheme hybrid
 
 "设置输入法切换
 set noimdisable
 autocmd! InsertLeave * set imdisable|set iminsert=0
 autocmd! InsertEnter * set noimdisable|set iminsert=0
+"set imdisable
+"set imactivatekey=D-space
+"set imsearch=0
+"set imcmdline=0
+"autocmd! CompleteDone * set imdisable|set iminsert=0 "for macvim
 
 "==============================
 " set my leader
