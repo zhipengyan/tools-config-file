@@ -15,6 +15,7 @@ Plugin 'tomasr/molokai'
 Plugin 'kristijanhusak/vim-hybrid-material'
 Plugin 'gilgigilgil/anderson.vim'
 Plugin 'w0ng/vim-hybrid'
+Plugin 'daylerees/colour-schemes', {'rtp': 'vim/'}
 
 Plugin 'ctrlp.vim'
 " from github
@@ -39,6 +40,15 @@ Plugin 'mileszs/ack.vim'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
+Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'isRuslan/vim-es6'
+"Plugin 'mxw/vim-jsx'
+Plugin 'jsx/jsx.vim'
+Plugin 'briancollins/vim-jst'
+Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'Yggdroot/LeaderF'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -62,12 +72,9 @@ set expandtab "设定使用空格代替制表符 用制表符使用noexpandtab
 " 针对不同文件设置缩进量
 if has("autocmd")
   autocmd FileType php set noexpandtab
-	autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType coffee setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType html setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd FileType xml setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd FileType scss setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd FileType css setlocal ts=4 sts=4 sw=4 expandtab
+	autocmd FileType javascript,coffee setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType html,ejs,jst,xml,css setlocal ts=4 sts=4 sw=4 expandtab
+	autocmd FileType scss setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
 endif
 set cursorline cursorcolumn
 " Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
@@ -110,8 +117,10 @@ syntax enable
 "  colorscheme hybrid_material
 "endif
 
+" hybrid
 colorscheme hybrid
 
+"colorscheme slime
 "设置输入法切换
 set noimdisable
 autocmd! InsertLeave * set imdisable|set iminsert=0
@@ -155,13 +164,43 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " =============================
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+map <leader>p :CtrlPMRU<CR>
 "use in  edit
 imap <C-A> <C-C><c-p>
 "use in none edit
 :map <leader>t <c-p>
 :map <leader>b :CtrlPBuffer<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_abbrev = {
+    \ 'gmode': 't',
+    \ 'abbrevs': [
+        \ {
+        \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
+        \ 'expanded': '_',
+        \ 'mode': 'pfrz',
+        \ },
+        \ ]
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
+let g:ctrlp_lazy_update=1
+let g:ctrlp_max_depth=40
+let g:ctrlp_max_files=1000
+let g:ctrlp_follow_symlinks=1
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+let g:ctrlp_funky_syntax_highlight = 1
+
+let g:ctrlp_extensions = ['funky']
 
 "==============================
 " Powerline configure
@@ -195,7 +234,7 @@ nnoremap <C-F>t :CtrlSFToggle<CR>
 inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '40%'
-nmap <leader>f :tab split<CR>:CtrlSF ""<left>
+nmap <leader>s :tab split<CR>:CtrlSF ""<left>
 
 "==============================
 " Syntastic configure

@@ -86,9 +86,10 @@ source ~/.nvm/nvm.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cdwork='cd ~/Workspace/'
 alias cdcow='cd ~/Workspace/cow/'
+alias cdtable='cd ~/Workspace/table/'
 alias clr='clear'
 alias mysql='mysql -u root -p'
-alias linode='ssh root@45.56.86.67'
+alias linode='ssh root@106.186.16.70'
 alias zshrc='vim ~/.zshrc'
 alias vimrc='vim ~/.vimrc'
 alias cdhexo='cd ~/Documents/hexo.source/_posts/'
