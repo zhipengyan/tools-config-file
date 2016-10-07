@@ -10,7 +10,8 @@ export PATH=$PATH:/Users/Sunny/Library/Android/sdk/platform-tools
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="gnzh"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -58,7 +59,8 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-source ~/.nvm/nvm.sh
+# source ~/.nvm/nvm.sh
+# source ~/.iterm2_shell_integration.`basename $SHELL`
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -85,6 +87,7 @@ source ~/.nvm/nvm.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cdwork='cd ~/Workspace/'
+alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 alias cdcow='cd ~/Workspace/cow/'
 alias cdtable='cd ~/Workspace/table/'
 alias clr='clear'
@@ -97,11 +100,15 @@ alias cddesk='cd ~/Desktop/'
 alias gpl='git pull origin '
 alias gpld='git pull origin develop'
 alias gps='git push origin '
+alias gs='git status'
+alias gct='git checkout'
+alias gctb='git checkout -b'
 alias apache="sudo apachectl start"
 alias mdebug="weinre --httpPort 9003 --boundHost -all-"
-alias linkwechat="autossh -M 2132 root@shimoweixin.oicp.net -N -R 9001:localhost:9001"
+alias linkwechat="autossh -M 2132 root@106.186.16.70 -N -R 9003:localhost:9003"
 alias mcoding="mvim /Users/Sunny/Workspace/cow/startup.js"
 alias coding="vim /Users/Sunny/Workspace/cow/startup.js"
 alias vim='/opt/local/vim74/bin/vim'
 alias tmuxrc='vim ~/.tmux.conf'
 alias appfolder='open $(getconf DARWIN_USER_CACHE_DIR)/com.apple.appstore'
+alias ip='ifconfig | grep 192.168.'

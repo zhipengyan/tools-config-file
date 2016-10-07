@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+syntax enable
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -7,8 +8,9 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-sensible'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'jistr/vim-nerdtree-tabs'
 " colors
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
@@ -16,24 +18,20 @@ Plugin 'kristijanhusak/vim-hybrid-material'
 Plugin 'gilgigilgil/anderson.vim'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'daylerees/colour-schemes', {'rtp': 'vim/'}
+Plugin 'trusktr/seti.vim'
 
 Plugin 'ctrlp.vim'
 " from github
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-surround'
+" suojin level xianshi 
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'mattn/emmet-vim'
 Plugin 'yonchu/accelerated-smooth-scroll'
-"只在MacVim下加载该YCM，因为内建vim版本太低不支持
-"if has('gui_running') 
-Plugin 'Valloric/YouCompleteMe'
-"endif
-" tern support coffee
-" http://blog.blackbing.net/post/2014/02/10/vim-ternjs-youcompleteme/
-Plugin 'marijnh/tern_for_vim' " 配合YCM满足js的代码补全
 Plugin 'othree/tern_for_vim_coffee' " 实现coffee的js代码补全
-" Plugin 'scrooloose/syntastic' " 代码纠错
 Plugin 'Lokaltog/vim-powerline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'mileszs/ack.vim'
@@ -43,19 +41,32 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'isRuslan/vim-es6'
-"Plugin 'mxw/vim-jsx'
-Plugin 'jsx/jsx.vim'
-Plugin 'briancollins/vim-jst'
+" Plugin 'isRuslan/vim-es6'
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'Yggdroot/LeaderF'
+Plugin 'mbbill/undotree'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'tpope/vim-pathogen'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+" 符号自动补全
+Plugin 'Raimondi/delimitMate'
+Plugin 'ternjs/tern_for_vim'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'tpope/vim-commentary'
+Plugin 'terryma/vim-expand-region'
+Plugin 'qpkorr/vim-bufkill'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+execute pathogen#infect()
 
-"set guifont=Source\ Code\ Pro:h10
-set guifont=Input\ Mono:h10
+"set guifont=Source\ Code\ Pro:h13
+"set guifont=Input\ Mono:h13
+set guifont=Hermit:h14
 set number "显示行号
 "set guitablabel=\[%N\]\ %t\ %M 
 "set autochdir " 自动切换当前目录为当前文件所在的目录
@@ -73,8 +84,8 @@ set expandtab "设定使用空格代替制表符 用制表符使用noexpandtab
 if has("autocmd")
   autocmd FileType php set noexpandtab
 	autocmd FileType javascript,coffee setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType html,ejs,jst,xml,css setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd FileType scss setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
+	autocmd FileType html,ejs,jst,xml,css,tpl setlocal ts=4 sts=4 sw=4 expandtab
+	autocmd FileType scss setlocal ts=4 sts=4 sw=4 expandtab iskeyword+=-
 endif
 set cursorline cursorcolumn
 " Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
@@ -91,15 +102,13 @@ let g:indent_guides_start_level = 1
 "==============================
 " 设置配色方案
 " =============================
-syntax enable
-"colorscheme solarized
-"if has('gui_running')
-	"set background=light"设置为浅色
-	"set background=dark
-"else
-	"set background=light
-"endif
-"let g:solarized_termcolors=256
+" syntax enable
+colorscheme solarized
+if has('gui_running')
+	set background=dark
+else
+  colorscheme seti
+endif
 
 " molokai
 " colorscheme molokai
@@ -118,13 +127,16 @@ syntax enable
 "endif
 
 " hybrid
-colorscheme hybrid
+" colorscheme hybrid
+
+" seti ui
+" colorscheme seti
 
 "colorscheme slime
 "设置输入法切换
-set noimdisable
-autocmd! InsertLeave * set imdisable|set iminsert=0
-autocmd! InsertEnter * set noimdisable|set iminsert=0
+"set noimdisable
+"autocmd! InsertLeave * set imdisable|set iminsert=0
+"autocmd! InsertEnter * set noimdisable|set iminsert=0
 "set imdisable
 "set imactivatekey=D-space
 "set imsearch=0
@@ -134,8 +146,10 @@ autocmd! InsertEnter * set noimdisable|set iminsert=0
 "==============================
 " set my leader
 " =============================
-let mapleader=","
-let g:mapleader=","
+" let mapleader=","
+" let g:mapleader=","
+let mapleader = ' '
+let g:mapleader = ' '
 
 "==============================
 " NerdTree configure
@@ -143,14 +157,15 @@ let g:mapleader=","
 let NERDTreeQuitOnOpen = 1
 let NERDChristmasTree = 1
 let g:NERDTreeWinSize = 25
-map <leader>n :NERDTreeToggle<CR>
+map <leader><leader> :NERDTreeToggle<CR>
+map <leader>n :NERDTreeFind<CR>
 
 "==============================
 " NerdTreeTabs configure
 " =============================
-let g:nerdtree_tabs_open_on_console_startup=1
-let g:nerdtree_tabs_open_on_gui_startup=1
-map <Leader>, <plug>NERDTreeTabsToggle<CR>
+" let g:nerdtree_tabs_open_on_console_startup=1
+" let g:nerdtree_tabs_open_on_gui_startup=1
+" map <Leader>, <plug>NERDTreeTabsToggle<CR>
 
 "==============================
 " Ack configure
@@ -162,27 +177,12 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 "==============================
 " CtrlP configure
 " =============================
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>p :CtrlPMRU<CR>
-"use in  edit
-imap <C-A> <C-C><c-p>
-"use in none edit
-:map <leader>t <c-p>
-:map <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|node_modules)$',
     \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_abbrev = {
-    \ 'gmode': 't',
-    \ 'abbrevs': [
-        \ {
-        \ 'pattern': '\(^@.\+\|\\\@<!:.\+\)\@<! ',
-        \ 'expanded': '_',
-        \ 'mode': 'pfrz',
-        \ },
-        \ ]
     \ }
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_match_window_bottom=1
@@ -190,14 +190,10 @@ let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
-let g:ctrlp_lazy_update=1
-let g:ctrlp_max_depth=40
-let g:ctrlp_max_files=1000
-let g:ctrlp_follow_symlinks=1
 
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+nnoremap <Leader>i :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <Leader>I :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 let g:ctrlp_funky_syntax_highlight = 1
 
 let g:ctrlp_extensions = ['funky']
@@ -205,8 +201,34 @@ let g:ctrlp_extensions = ['funky']
 "==============================
 " Powerline configure
 " =============================
+" set laststatus=2
+" let g:Powerline_symbols='unicode'
+
+"==============================
+" Airline configure
+" =============================
 set laststatus=2
-let g:Powerline_symbols='unicode'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airlien#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1 
+" tabline中buffer显示编号
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline_theme = 'bubblegum'
+" 映射切换buffer的键位
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+" 映射<leader>num到num buffer
+map <leader>1 :b 1<CR>
+map <leader>2 :b 2<CR>
+map <leader>3 :b 3<CR>
+map <leader>4 :b 4<CR>
+map <leader>5 :b 5<CR>
+map <leader>6 :b 6<CR>
+map <leader>7 :b 7<CR>
+map <leader>8 :b 8<CR>
+map <leader>9 :b 9<CR>
+
 
 "==============================
 " Backup configure
@@ -219,7 +241,7 @@ set noundofile
 "==============================
 " EasyMotinon configure
 " =============================
-let g:EasyMotion_leader_key='<Space>'
+let g:EasyMotion_leader_key=','
 
 "==============================
 " CtrlSF configure
@@ -239,10 +261,62 @@ nmap <leader>s :tab split<CR>:CtrlSF ""<left>
 "==============================
 " Syntastic configure
 " =============================
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+map <leader>l :lopen<CR>
+map <leader>L :lclose<CR>
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint'
+let g:syntastic_disabled_filetypes=['html']
+" let g:syntastic_debug = 3
+
+let g:syntastic_error_symbol = '❌'
+let g:syntastic_style_error_symbol = '⁉️'
+let g:syntastic_warning_symbol = '👉'
+let g:syntastic_style_warning_symbol = '💩'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+highlight link SyntasticStyleErrorSign SignColumn
+highlight link SyntasticStyleWarningSign SignColumn
+
+"=============================
+" undotree configure
+"=============================
+if has("persistent_undo")
+  set undodir=~/.undodir/
+  set undofile
+endif
+nnoremap <F5> :UndotreeToggle<cr>
+
+"=============================
+" easy-align configure
+"=============================
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+"=============================
+" delimitMate configure
+" auto indent wrap
+"=============================
+
+
+"=============================
+" vim-javascript configure
+"=============================
+let g:javascript_plugin_jsdoc = 1
+
+"=============================
+" vim-expand-region configure
+"=============================
+map <leader>k <Plug>(expand_region_expand)
+map <leader>j <Plug>(expand_region_shrink)
