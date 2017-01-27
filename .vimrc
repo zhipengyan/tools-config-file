@@ -80,6 +80,8 @@ set shiftwidth=2 " 设定 << 和 >> 命令移动时的宽度为 4
 set softtabstop=2 " 使得按退格键时可以一次删掉 4 个空格
 set tabstop=2 " 设定 tab 长度为 4
 set expandtab "设定使用空格代替制表符 用制表符使用noexpandtab
+set smartindent
+set autoindent
 " 针对不同文件设置缩进量
 if has("autocmd")
   autocmd FileType php set noexpandtab
@@ -208,7 +210,7 @@ let g:ctrlp_extensions = ['funky']
 " Airline configure
 " =============================
 set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airlien#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts = 1 
