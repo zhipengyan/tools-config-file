@@ -5,6 +5,10 @@ export GOROOT=/usr/local/go
 export PATH=/usr/local/go/bin:$PATH
 export GOPATH=$HOME/Workspace/go
 export PATH=$PATH:/Users/Sunny/Library/Android/sdk/platform-tools
+export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
+export SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/
+export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
+export PATH=$PATH:/usr/local/sbin
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -59,8 +63,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
-# source ~/.nvm/nvm.sh
-# source ~/.iterm2_shell_integration.`basename $SHELL`
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -78,6 +80,9 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+# homebrew mirror
+export HOMEBREW_BOTTLE_DOMAIN=http://7xkcej.dl1.z0.glb.clouddn.com
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -88,8 +93,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cdwork='cd ~/Workspace/'
 alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
-alias cdcow='cd ~/Workspace/cow/'
-alias cdtable='cd ~/Workspace/table/'
+alias cdcow='cd ~/Code/shimo/cow/'
 alias clr='clear'
 alias mysql='mysql -u root -p'
 alias linode='ssh root@106.186.16.70'
@@ -105,11 +109,20 @@ alias gct='git checkout'
 alias gctb='git checkout -b'
 alias apache="sudo apachectl start"
 alias mdebug="weinre --httpPort 9003 --boundHost -all-"
-alias linkwechat="autossh -M 2132 root@106.186.16.70 -N -R 9003:localhost:9003"
-alias mcoding="mvim /Users/Sunny/Workspace/cow/startup.js"
+alias linkwechat="autossh -M 2132 root@106.186.16.70 -N -R 80:localhost:12345"
+# alias mcoding="mvim /Users/Sunny/Workspace/cow/startup.js"
 alias coding="vim /Users/Sunny/Workspace/cow/startup.js"
-alias vim='/opt/local/vim74/bin/vim'
 alias tmuxrc='vim ~/.tmux.conf'
 alias appfolder='open $(getconf DARWIN_USER_CACHE_DIR)/com.apple.appstore'
 alias ip='ifconfig | grep 192.168.'
 alias lst='lt --host http://sunnyyan.com:2000 --port 3012'
+alias pon='export http_proxy=127.0.0.1:6152;export https_proxy=$http_proxy' 
+alias pons='export http_proxy=127.0.0.1:8123;export https_proxy=$http_proxy' 
+alias poff='unset http_proxy;unset https_proxy'
+alias csh="polipo socksParentProxy=localhost:1080 &"
+alias cdweb="cd /Library/WebServer/Documents"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
