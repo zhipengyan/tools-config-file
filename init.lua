@@ -56,13 +56,13 @@ local focus_mash = {"ctrl"}
 
 -------------------- launch ----------------------
 local launch_mash = {"cmd"}
-hs.hotkey.bind(launch_mash, "0", function() ext.app.forceLaunchOrFocus("Discord") end)
+hs.hotkey.bind(launch_mash, "0", function() ext.app.forceLaunchOrFocus("Dingtalk") end)
 hs.hotkey.bind(launch_mash, "1", function() ext.app.forceLaunchOrFocus("Finder") end)
 hs.hotkey.bind(launch_mash, "2", function() ext.app.forceLaunchOrFocus("QQ") end)
 hs.hotkey.bind(launch_mash, "3", function() ext.app.forceLaunchOrFocus("Google Chrome") end)
 hs.hotkey.bind(launch_mash, "4", function() ext.app.forceLaunchOrFocus("MacVim") end)
 hs.hotkey.bind(launch_mash, "5", function() ext.app.forceLaunchOrFocus("iTerm") end)
-hs.hotkey.bind(launch_mash, "6", function() ext.app.forceLaunchOrFocus("Sublime Text") end)
+hs.hotkey.bind(launch_mash, "6", function() ext.app.forceLaunchOrFocus("Visual Studio Code") end)
 hs.hotkey.bind(launch_mash, "7", function() ext.app.forceLaunchOrFocus("Preview") end)
 hs.hotkey.bind(launch_mash, "8", function() ext.app.forceLaunchOrFocus("NeteaseMusic") end)
 hs.hotkey.bind(launch_mash, "9", function() ext.app.forceLaunchOrFocus("Emacs") end)

@@ -20,8 +20,14 @@ Plugin 'w0ng/vim-hybrid'
 Plugin 'daylerees/colour-schemes', {'rtp': 'vim/'}
 Plugin 'trusktr/seti.vim'
 
-Plugin 'ctrlp.vim'
 " from github
+" for typescript
+Plugin 'leafgarland/typescript-vim'
+Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'Quramy/tsuquyomi'
+" for typescript end
+Plugin 'cespare/vim-toml'
+Plugin 'stephpy/vim-yaml'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-surround'
 " suojin level xianshi 
@@ -34,39 +40,46 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'mileszs/ack.vim'
-Plugin 'dyng/ctrlsf.vim'
+" Plugin 'mileszs/ack.vim' " use ag replaced
+Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
 Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'cakebaker/scss-syntax.vim'
 " Plugin 'isRuslan/vim-es6'
-Plugin 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'Yggdroot/LeaderF'
+" Plugin 'Yggdroot/LeaderF'
 Plugin 'mbbill/undotree'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'tpope/vim-pathogen'
 Plugin 'scrooloose/syntastic'
+Plugin 'idbrii/AsyncCommand'
+Plugin 'stgpetrovic/syntastic-async'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'jeetsukumaran/vim-buffergator'
 " 符号自动补全
 Plugin 'Raimondi/delimitMate'
 Plugin 'ternjs/tern_for_vim'
-Plugin 'sheerun/vim-polyglot'
 Plugin 'tpope/vim-commentary'
 Plugin 'terryma/vim-expand-region'
 Plugin 'qpkorr/vim-bufkill'
+" fuzzy finder
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 execute pathogen#infect()
 
+" 中文乱码问题
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+
 "set guifont=Source\ Code\ Pro:h13
-"set guifont=Input\ Mono:h13
-set guifont=Hermit:h14
+set guifont=Input\ Mono:h13
+"set guifont=Source\ Code\ Pro:h13
 set number "显示行号
 "set guitablabel=\[%N\]\ %t\ %M 
 "set autochdir " 自动切换当前目录为当前文件所在的目录
@@ -85,9 +98,9 @@ set autoindent
 " 针对不同文件设置缩进量
 if has("autocmd")
   autocmd FileType php set noexpandtab
-	autocmd FileType javascript,coffee setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType html,ejs,jst,xml,css,tpl setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd FileType scss setlocal ts=4 sts=4 sw=4 expandtab iskeyword+=-
+	autocmd FileType javascript,typescript,coffee setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType html,ejs,jst,xml,tpl setlocal ts=4 sts=4 sw=4 expandtab
+	autocmd FileType scss,css setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
 endif
 set cursorline cursorcolumn
 " Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
@@ -159,6 +172,7 @@ let g:mapleader = ' '
 let NERDTreeQuitOnOpen = 1
 let NERDChristmasTree = 1
 let g:NERDTreeWinSize = 25
+let NERDTreeShowHidden=1
 map <leader><leader> :NERDTreeToggle<CR>
 map <leader>n :NERDTreeFind<CR>
 
@@ -169,36 +183,36 @@ map <leader>n :NERDTreeFind<CR>
 " let g:nerdtree_tabs_open_on_gui_startup=1
 " map <Leader>, <plug>NERDTreeTabsToggle<CR>
 
+
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+nnoremap <leader>p :GFiles<cr>
+
 "==============================
 " Ack configure
 " =============================
-nmap <leader>a :tab split<CR>:Ack ""<left>
-nmap <leader>A :tab split<CR>:Ack <C-r><C-w><CR>
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" nmap <leader>/ :tab split<CR>:Ack ""<left>
+" nmap <leader>A :tab split<CR>:Ack <C-r><C-w><CR>
+" let g:ackprg = 'rg --line-number --column --ignore-case --hidden --follow --glob "!.git/*" --color'
+"" let g:ackprg = 'ag --nogroup --nocolor --column'
 
 "==============================
-" CtrlP configure
+" Ag configure
 " =============================
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_cmd = 'CtrlP'
-map <leader>p :CtrlPMRU<CR>
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm|node_modules)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-
-nnoremap <Leader>i :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>I :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-let g:ctrlp_funky_syntax_highlight = 1
-
-let g:ctrlp_extensions = ['funky']
+nmap <leader>/ :tab split<CR>:Ag ""<left>
+nmap <leader>A :tab split<CR>:Ag <C-r><C-w><CR>
+let g:ag_prg = 'rg --line-number --vimgrep --column --smart-case --colors "line:style:bold" --hidden --follow --glob "!.git/*"'
+let g:ag_working_path_mode="r"
+let g:ag_highlight=1
 
 "==============================
 " Powerline configure
@@ -209,7 +223,7 @@ let g:ctrlp_extensions = ['funky']
 "==============================
 " Airline configure
 " =============================
-set laststatus=2
+set laststatus=1
 let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airlien#extensions#tabline#left_alt_sep = '|'
@@ -246,21 +260,6 @@ set noundofile
 let g:EasyMotion_leader_key=','
 
 "==============================
-" CtrlSF configure
-" =============================
-nmap     <C-F>f <Plug>CtrlSFPrompt
-vmap     <C-F>f <Plug>CtrlSFVwordPath
-vmap     <C-F>F <Plug>CtrlSFVwordExec
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-nmap     <C-F>p <Plug>CtrlSFPwordPath
-nnoremap <C-F>o :CtrlSFOpen<CR>
-nnoremap <C-F>t :CtrlSFToggle<CR>
-inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
-let g:ctrlsf_position = 'bottom'
-let g:ctrlsf_winsize = '40%'
-nmap <leader>s :tab split<CR>:CtrlSF ""<left>
-
-"==============================
 " Syntastic configure
 " =============================
 set statusline+=%#warningmsg#
@@ -269,20 +268,28 @@ set statusline+=%*
 map <leader>l :lopen<CR>
 map <leader>L :lclose<CR>
 
+" if has("autocmd")
+"   autocmd FileType javascript let b:syntatic_checkers = ['eslint']
+" endif
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
+let g:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint'
+let g:syntastic_typescript_tslint_exec = 'node_modules/.bin/tslint'
+let g:syntastic_typescript_checkers = ['tslint']
+let g:syntastic_typescriptreact_tslint_exec = 'node_modules/.bin/tslint'
+let g:syntastic_typescriptreact_checkers = ['tslint']
 let g:syntastic_disabled_filetypes=['html']
 " let g:syntastic_debug = 3
 
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '👉'
-let g:syntastic_style_warning_symbol = '💩'
+let g:syntastic_error_symbol = '💥'
+let g:syntastic_warning_symbol = '🔅'
+let g:syntastic_style_error_symbol = '😡'
+let g:syntastic_style_warning_symbol = '😯'
 
 highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn
@@ -310,7 +317,7 @@ nmap ga <Plug>(EasyAlign)
 " delimitMate configure
 " auto indent wrap
 "=============================
-
+let delimitMate_expand_cr = 1
 
 "=============================
 " vim-javascript configure
@@ -322,3 +329,20 @@ let g:javascript_plugin_jsdoc = 1
 "=============================
 map <leader>k <Plug>(expand_region_expand)
 map <leader>j <Plug>(expand_region_shrink)
+
+
+"=============================
+" typescript configure
+"=============================
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+autocmd FileType typescript setlocal completeopt+=menu,preview
+let g:tsuquyomi_completion_detail = 1
+let g:typescript_indent_disable = 1
+
+"=============================
+" switch to last buffer
+"=============================
+nnoremap <c-6> :b#<cr>

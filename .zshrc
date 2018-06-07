@@ -9,13 +9,27 @@ export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
 export SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/
 export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
 export PATH=$PATH:/usr/local/sbin
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
+
+# --files: List files that would be searched but do not search
+# --no-ignore: Do not respect .gitignore, etc...
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
+source $HOME/.cargo/env
+
+# npm 自动补全支持
+# npm completion
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="gnzh"
+# ZSH_THEME="gnzh"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -55,7 +69,7 @@ ZSH_THEME="gnzh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autojump ruby osx)
+plugins=(git autojump ruby osx zsh-better-npm-completion zsh-wakatime)
 
 # User configuration
 
@@ -97,6 +111,7 @@ alias cdcow='cd ~/Code/shimo/cow/'
 alias clr='clear'
 alias mysql='mysql -u root -p'
 alias linode='ssh root@106.186.16.70'
+alias aliyun='ssh -i ~/.ssh/mac_pro.pem root@47.104.201.47'
 alias zshrc='vim ~/.zshrc'
 alias vimrc='vim ~/.vimrc'
 alias cdhexo='cd ~/Documents/hexo.source/_posts/'
@@ -116,13 +131,29 @@ alias tmuxrc='vim ~/.tmux.conf'
 alias appfolder='open $(getconf DARWIN_USER_CACHE_DIR)/com.apple.appstore'
 alias ip='ifconfig | grep 192.168.'
 alias lst='lt --host http://sunnyyan.com:2000 --port 3012'
+alias ltwx='lt --host http://adnbe.cn:80 -p 80 -s ngrok'
 alias pon='export http_proxy=127.0.0.1:6152;export https_proxy=$http_proxy' 
 alias pons='export http_proxy=127.0.0.1:8123;export https_proxy=$http_proxy' 
 alias poff='unset http_proxy;unset https_proxy'
 alias csh="polipo socksParentProxy=localhost:1080 &"
 alias cdweb="cd /Library/WebServer/Documents"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+alias goto-master="git branch -D master && git fetch origin master && git checkout master"
+alias goto-develop="git checkout develop"
+alias goto-release="git branch -D release && git fetch origin release && git checkout release"
+alias pm2d="pm2 delete all"
+alias updateapi="currentDir=`pwd` && cd ~/Code/shimo/api && gpld && npm i && npm run migrate up && cd ${currentDir}"
+alias updatecow="currentDir=`pwd` && cd ~/Code/shimo/cow && gpld && npm i && cd ${currentDir}"
+alias updatequill="currentDir=`pwd` && cd ~/Code/shimo/quill && gpld && npm i && npx lerna bootstrap && cd ${currentDir}"
+alias updateall="updateapi && updatecow && updatequill"
+alias homemode="cp -f ~/Code/shimo/.local-config/local.home.toml ~/Code/shimo/eagle/config/local.toml && cp -f ~/Code/shimo/.local-config/resource_loader.js ~/Code/shimo/cow/front/assets/scripts/cow/pc/shared/resource_loader.js"
+alias shimomode="cp -f ~/Code/shimo/.local-config/local.shimo.toml ~/Code/shimo/eagle/config/local.toml && cp -f ~/Code/shimo/.local-config/resource_loader.js ~/Code/shimo/cow/front/assets/scripts/cow/pc/shared/resource_loader.js"
+alias defaultmode="cp -f ~/Code/shimo/.local-config/local.default.toml ~/Code/shimo/eagle/config/local.toml && cd ~/Code/shimo/cow && git checkout front/assets/scripts/cow/pc/shared/resource_loader.js"
+alias weworkmode="cp -f ~/Code/shimo/.local-config/m_plain_wework.html ~/Code/shimo/cow/app/views/mobile/m_plain.html"
+alias rlock="rm ~/Code/shimo/quill/packages/adapter-web/package-lock.json ~/Code/shimo/quill/packages/core-editor/package-lock.json ~/Code/shimo/quill/packages/plugin-collaborator/package-lock.json ~/Code/shimo/quill/packages/plugin-history/package-lock.json ~/Code/shimo/quill/packages/plugin-mention/package-lock.json ~/Code/shimo/quill/packages/plugin-revision/package-lock.json ~/Code/shimo/quill/packages/plugin-table-of-content/package-lock.json"
+alias bapp="cd ~/Code/shimo/quill && npm run build-client && cp -f ~/Code/shimo/quill/packages/client/dist/quill.js ~/Code/shimo/baboon/node_modules/@shimo/client-quill/dist && cd ~/Code/shimo/baboon && npm run build-dev"
+alias bapp2="cd ~/Code/shimo/_quill && npm run build-client && cp -f ~/Code/shimo/_quill/packages/client/dist/quill.js ~/Code/shimo/baboon/node_modules/@shimo/client-quill/dist && cd ~/Code/shimo/baboon && npm run build-dev"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
