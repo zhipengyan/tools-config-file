@@ -19,6 +19,7 @@ Plugin 'gilgigilgil/anderson.vim'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'daylerees/colour-schemes', {'rtp': 'vim/'}
 Plugin 'trusktr/seti.vim'
+Plugin 'dracula/vim'
 
 " from github
 " for typescript
@@ -59,6 +60,7 @@ Plugin 'idbrii/AsyncCommand'
 Plugin 'stgpetrovic/syntastic-async'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'wavded/vim-stylus'
 " 符号自动补全
 Plugin 'Raimondi/delimitMate'
 Plugin 'ternjs/tern_for_vim'
@@ -118,9 +120,10 @@ let g:indent_guides_start_level = 1
 " 设置配色方案
 " =============================
 " syntax enable
-colorscheme solarized
+" colorscheme solarized
+colorscheme dracula
 if has('gui_running')
-	set background=dark
+	" set background=dark
 else
   colorscheme seti
 endif
