@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+ set nocompatible              " be iMproved, required
 filetype off                  " required
 syntax enable
 
@@ -20,13 +20,19 @@ Plugin 'w0ng/vim-hybrid'
 Plugin 'daylerees/colour-schemes', {'rtp': 'vim/'}
 Plugin 'trusktr/seti.vim'
 Plugin 'dracula/vim'
+Plugin 'cocopon/iceberg.vim'
+Plugin 'morhetz/gruvbox'
 
 " from github
 " for typescript
 Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'ianks/vim-tsx'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'Quramy/tsuquyomi'
 " for typescript end
+" es6 an es7 syntax
+Plugin 'othree/yajs.vim'
 Plugin 'cespare/vim-toml'
 Plugin 'stephpy/vim-yaml'
 Plugin 'kchmck/vim-coffee-script'
@@ -45,6 +51,7 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'cakebaker/scss-syntax.vim'
@@ -59,7 +66,9 @@ Plugin 'scrooloose/syntastic'
 Plugin 'idbrii/AsyncCommand'
 Plugin 'stgpetrovic/syntastic-async'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'jeetsukumaran/vim-buffergator'
+
+" Plugin 'jeetsukumaran/vim-buffergator'
+" Plugin 'mihaifm/bufstop'
 Plugin 'wavded/vim-stylus'
 " 符号自动补全
 Plugin 'Raimondi/delimitMate'
@@ -70,6 +79,13 @@ Plugin 'qpkorr/vim-bufkill'
 " fuzzy finder
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'majutsushi/tagbar'
+Plugin 'ryanoasis/vim-devicons'
+" git
+Plugin 'mhinz/vim-signify'
+" start screen
+Plugin 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -79,8 +95,12 @@ execute pathogen#infect()
 " 中文乱码问题
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
-"set guifont=Source\ Code\ Pro:h13
-set guifont=Input\ Mono:h13
+" set guifont=Source\ Code\ Pro:h13
+" set guifont=Input\ Mono:h13
+" set guifont=Fantasque\ Sans\ Mono:h15
+if has('gui_running')
+  set guifont=RobotoMono\ Nerd\ Font:h13
+endif
 "set guifont=Source\ Code\ Pro:h13
 set number "显示行号
 "set guitablabel=\[%N\]\ %t\ %M 
@@ -122,8 +142,10 @@ let g:indent_guides_start_level = 1
 " syntax enable
 " colorscheme solarized
 colorscheme dracula
+" colorscheme iceberg
+" colorscheme gruvbox
 if has('gui_running')
-	" set background=dark
+	set background=dark
 else
   colorscheme seti
 endif
@@ -176,6 +198,7 @@ let NERDTreeQuitOnOpen = 1
 let NERDChristmasTree = 1
 let g:NERDTreeWinSize = 25
 let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.DS_Store$']
 map <leader><leader> :NERDTreeToggle<CR>
 map <leader>n :NERDTreeFind<CR>
 
@@ -345,7 +368,36 @@ autocmd FileType typescript setlocal completeopt+=menu,preview
 let g:tsuquyomi_completion_detail = 1
 let g:typescript_indent_disable = 1
 
+
 "=============================
 " switch to last buffer
 "=============================
-nnoremap <c-6> :b#<cr>
+nnoremap <c-6> :bp<cr>
+
+"=============================
+" buffer
+"=============================
+map <leader>b :Buffers<CR>
+
+"=============================
+" js-beautify
+"=============================
+map <c-f> :call JsBeautify()<cr>
+
+"=============================
+" tagbar
+"=============================
+nmap <leader>t :TagbarToggle<CR>
+
+"=============================
+" devicons
+"=============================
+" loading the plugin
+let g:webdevicons_enable = 1
+" adding the flags to NERDTree
+let g:webdevicons_enable_nerdtree = 1
+" adding to vim-airline's tabline
+let g:webdevicons_enable_airline_tabline = 1
+" adding to vim-airline's statusline
+let g:webdevicons_enable_airline_statusline = 1
+let g:airline_powerline_fonts = 1

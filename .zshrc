@@ -9,7 +9,12 @@ export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
 export SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/
 export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
 export PATH=$PATH:/usr/local/sbin
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
+export grpc_node_binary_host_mirror=http://npm.taobao.org/mirrors
+export GOROOT=/usr/local/opt/go@1.11
+export PATH=$PATH:$GOROOT/bin
+# export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
+export LDFLAGS="-L/usr/local/opt/openssl/lib";
+export CPPFLAGS="-I/usr/local/opt/openssl/include";
 
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
@@ -106,7 +111,7 @@ export HOMEBREW_BOTTLE_DOMAIN=http://7xkcej.dl1.z0.glb.clouddn.com
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cdwork='cd ~/Workspace/'
-alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+# alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 alias cdcow='cd ~/Code/shimo/cow/'
 alias clr='clear'
 alias mysql='mysql -u root -p'
@@ -118,12 +123,15 @@ alias cdhexo='cd ~/Documents/hexo.source/_posts/'
 alias cddesk='cd ~/Desktop/'
 alias gpl='git pull origin '
 alias gpld='git pull origin develop'
+alias gplc='branch=`git symbolic-ref --short -q HEAD` && git pull origin "${branch}"'
+alias gpsc='branch=`git symbolic-ref --short -q HEAD` && git push origin "${branch}"'
+alias gdb='branch=`git symbolic-ref --short -q HEAD` && git checkout develop && git branch -D "${branch}" && gplc'
 alias gps='git push origin '
 alias gs='git status'
 alias gct='git checkout'
 alias gctb='git checkout -b'
 alias apache="sudo apachectl start"
-alias mdebug="weinre --httpPort 9003 --boundHost -all-"
+alias mdebug="weinre --httpPort 9009 --boundHost -all-"
 alias linkwechat="autossh -M 2132 root@106.186.16.70 -N -R 80:localhost:12345"
 # alias mcoding="mvim /Users/Sunny/Workspace/cow/startup.js"
 alias coding="vim /Users/Sunny/Workspace/cow/startup.js"
@@ -152,8 +160,13 @@ alias weworkmode="cp -f ~/Code/shimo/.local-config/m_plain_wework.html ~/Code/sh
 alias rlock="rm ~/Code/shimo/quill/packages/adapter-web/package-lock.json ~/Code/shimo/quill/packages/core-editor/package-lock.json ~/Code/shimo/quill/packages/plugin-collaborator/package-lock.json ~/Code/shimo/quill/packages/plugin-history/package-lock.json ~/Code/shimo/quill/packages/plugin-mention/package-lock.json ~/Code/shimo/quill/packages/plugin-revision/package-lock.json ~/Code/shimo/quill/packages/plugin-table-of-content/package-lock.json"
 alias bapp="cd ~/Code/shimo/quill && npm run build-client && cp -f ~/Code/shimo/quill/packages/client/dist/quill.js ~/Code/shimo/baboon/node_modules/@shimo/client-quill/dist && cd ~/Code/shimo/baboon && npm run build-dev"
 alias bapp2="cd ~/Code/shimo/_quill && npm run build-client && cp -f ~/Code/shimo/_quill/packages/client/dist/quill.js ~/Code/shimo/baboon/node_modules/@shimo/client-quill/dist && cd ~/Code/shimo/baboon && npm run build-dev"
+alias ssh@deploy="ssh yanzhipeng@139.219.0.67"
+alias ssh@doc="ssh yanzhipeng@172.16.20.102"
 # export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
+alias build-editor="npx lerna run build --scope=@shimo/sdk-document-editor"
+alias build-quill="npx lerna run build --scope=@shimo/sdk-document-quill"
+alias build-comment="npx lerna run build --scope=@shimo/sdk-document-plugin-comment"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
