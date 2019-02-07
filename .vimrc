@@ -1,94 +1,90 @@
- set nocompatible              " be iMproved, required
+set nocompatible              " be iMproved, required
 filetype off                  " required
 syntax enable
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-sensible'
-Plugin 'scrooloose/nerdtree'
-" Plugin 'jistr/vim-nerdtree-tabs'
+Plug 'VundleVim/Vundle.vim'
+Plug 'tpope/vim-sensible'
+Plug 'scrooloose/nerdtree'
+" Plug 'jistr/vim-nerdtree-tabs'
 " colors
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'gilgigilgil/anderson.vim'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'daylerees/colour-schemes', {'rtp': 'vim/'}
-Plugin 'trusktr/seti.vim'
-Plugin 'dracula/vim'
-Plugin 'cocopon/iceberg.vim'
-Plugin 'morhetz/gruvbox'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'gilgigilgil/anderson.vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'daylerees/colour-schemes', {'rtp': 'vim/'}
+Plug 'trusktr/seti.vim'
+Plug 'dracula/vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'morhetz/gruvbox'
 
 " from github
 " for typescript
-Plugin 'leafgarland/typescript-vim'
-Plugin 'peitalin/vim-jsx-typescript'
-Plugin 'ianks/vim-tsx'
-Plugin 'HerringtonDarkholme/yats.vim'
-Plugin 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'ianks/vim-tsx'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'Quramy/tsuquyomi'
 " for typescript end
 " es6 an es7 syntax
-Plugin 'othree/yajs.vim'
-Plugin 'cespare/vim-toml'
-Plugin 'stephpy/vim-yaml'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-surround'
+Plug 'othree/yajs.vim'
+Plug 'cespare/vim-toml'
+Plug 'stephpy/vim-yaml'
+Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-surround'
 " suojin level xianshi 
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'mattn/emmet-vim'
-Plugin 'yonchu/accelerated-smooth-scroll'
-Plugin 'othree/tern_for_vim_coffee' " 实现coffee的js代码补全
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Lokaltog/vim-easymotion'
-"Plugin 'Xuyuanp/nerdtree-git-plugin'
-" Plugin 'mileszs/ack.vim' " use ag replaced
-Plugin 'rking/ag.vim'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'cakebaker/scss-syntax.vim'
-" Plugin 'isRuslan/vim-es6'
-" Plugin 'mxw/vim-jsx'
-Plugin 'pangloss/vim-javascript'
-" Plugin 'Yggdroot/LeaderF'
-Plugin 'mbbill/undotree'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'tpope/vim-pathogen'
-Plugin 'scrooloose/syntastic'
-Plugin 'idbrii/AsyncCommand'
-Plugin 'stgpetrovic/syntastic-async'
-Plugin 'Valloric/YouCompleteMe'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'mattn/emmet-vim'
+Plug 'yonchu/accelerated-smooth-scroll'
+Plug 'othree/tern_for_vim_coffee' " 实现coffee的js代码补全
+Plug 'Lokaltog/vim-powerline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Lokaltog/vim-easymotion'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'mileszs/ack.vim' " use ag replaced
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax.vim'
+" Plug 'isRuslan/vim-es6'
+" Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+" Plug 'Yggdroot/LeaderF'
+Plug 'mbbill/undotree'
+Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-pathogen'
+Plug 'scrooloose/syntastic'
+Plug 'idbrii/AsyncCommand'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
-" Plugin 'jeetsukumaran/vim-buffergator'
-" Plugin 'mihaifm/bufstop'
-Plugin 'wavded/vim-stylus'
+" Plug 'jeetsukumaran/vim-buffergator'
+" Plug 'mihaifm/bufstop'
+Plug 'wavded/vim-stylus'
 " 符号自动补全
-Plugin 'Raimondi/delimitMate'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'tpope/vim-commentary'
-Plugin 'terryma/vim-expand-region'
-Plugin 'qpkorr/vim-bufkill'
+Plug 'Raimondi/delimitMate'
+Plug 'ternjs/tern_for_vim'
+Plug 'tpope/vim-commentary'
+Plug 'terryma/vim-expand-region'
+Plug 'qpkorr/vim-bufkill'
 " fuzzy finder
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'majutsushi/tagbar'
-Plugin 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'majutsushi/tagbar'
+Plug 'ryanoasis/vim-devicons'
 " git
-Plugin 'mhinz/vim-signify'
+Plug 'mhinz/vim-signify'
 " start screen
-Plugin 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()
 filetype plugin indent on    " required
 execute pathogen#infect()
 
