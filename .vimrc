@@ -60,9 +60,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'mbbill/undotree'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-pathogen'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'idbrii/AsyncCommand'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe'
 
 " Plug 'jeetsukumaran/vim-buffergator'
 " Plug 'mihaifm/bufstop'
@@ -83,6 +84,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-signify'
 " start screen
 Plug 'mhinz/vim-startify'
+" php
+Plug 'StanAngeloff/php.vim'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -319,6 +322,21 @@ highlight link SyntasticStyleErrorSign SignColumn
 highlight link SyntasticStyleWarningSign SignColumn
 
 "=============================
+" ale configure
+"=============================
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['tslint'],
+\   'typescriptreact': ['tslint'],
+\}
+let g:ale_sign_error = '💥'
+let g:ale_sign_warning = '🔅'
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_enter = 0
+let g:airline#extensions#ale#enabled = 1
+
+"=============================
 " undotree configure
 "=============================
 if has("persistent_undo")
@@ -397,3 +415,20 @@ let g:webdevicons_enable_airline_tabline = 1
 " adding to vim-airline's statusline
 let g:webdevicons_enable_airline_statusline = 1
 let g:airline_powerline_fonts = 1
+
+"=============================
+" startify
+"=============================
+nmap <leader>h :Startify<CR>
+let g:startify_session_dir = '~/.vim/session'
+let g:startify_bookmarks = [
+  \ '~/Code/shimo/shark/package.json',
+  \ '~/code/shimo/eagle-develop/package.json',
+  \ '~/.vimrc',
+  \ ]
+let g:startify_lists = [
+  \ { 'type': 'sessions',  'header': ['   Sessions']       },
+  \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+  \ { 'type': 'files',     'header': ['   MRU']            },
+  \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+  \ ]
