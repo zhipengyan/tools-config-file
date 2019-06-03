@@ -116,6 +116,7 @@ alias cdcow='cd ~/Code/shimo/cow/'
 alias clr='clear'
 alias mysql='mysql -u root -p'
 alias linode='ssh root@106.186.16.70'
+alias linode2='ssh root@139.162.114.207'
 alias aliyun='ssh -i ~/.ssh/mac_pro.pem root@47.104.201.47'
 alias zshrc='vim ~/.zshrc'
 alias vimrc='vim ~/.vimrc'
@@ -161,6 +162,7 @@ alias rlock="rm ~/Code/shimo/quill/packages/adapter-web/package-lock.json ~/Code
 alias bapp="cd ~/Code/shimo/quill && npm run build-client && cp -f ~/Code/shimo/quill/packages/client/dist/quill.js ~/Code/shimo/baboon/node_modules/@shimo/client-quill/dist && cd ~/Code/shimo/baboon && npm run build-dev"
 alias bapp2="cd ~/Code/shimo/_quill && npm run build-client && cp -f ~/Code/shimo/_quill/packages/client/dist/quill.js ~/Code/shimo/baboon/node_modules/@shimo/client-quill/dist && cd ~/Code/shimo/baboon && npm run build-dev"
 alias ssh@deploy="ssh yanzhipeng@139.219.0.67"
+alias ssh@deploy2="ssh yanzhipeng@42.159.113.98"
 alias ssh@doc="ssh yanzhipeng@172.16.20.102"
 # export PATH="$PYENV_ROOT/bin:$PATH"
 # eval "$(pyenv init -)"
@@ -170,3 +172,16 @@ alias build-comment="npx lerna run build --scope=@shimo/sdk-document-plugin-comm
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+POWERLEVEL9K_MODE='nerdfont-complete'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_icon ssh dir vcs newline status)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time)
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_CUSTOM_ICON="echo -n '\ue231'"
+POWERLEVEL9K_CUSTOM_ICON_FOREGROUND="black"
+POWERLEVEL9K_CUSTOM_ICON_BACKGROUND="yellow"
+source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
+HOMEBREW_FOLDER="/usr/local/share"
+source "$HOMEBREW_FOLDER/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOMEBREW_FOLDER/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
