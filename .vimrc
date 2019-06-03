@@ -2,6 +2,11 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 syntax enable
 
+let g:python_host_skip_check=1
+let g:python3_host_skip_check=1
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python3'
+
 call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle, required
@@ -56,14 +61,16 @@ Plug 'cakebaker/scss-syntax.vim'
 " Plug 'isRuslan/vim-es6'
 " Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
-" Plug 'Yggdroot/LeaderF'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'mbbill/undotree'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-pathogen'
 " Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
-Plug 'idbrii/AsyncCommand'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'idbrii/AsyncCommand'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 " Plug 'jeetsukumaran/vim-buffergator'
 " Plug 'mihaifm/bufstop'
@@ -86,6 +93,16 @@ Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
 " php
 Plug 'StanAngeloff/php.vim'
+" fold
+Plug 'Konfekt/FastFold'
+" https://github.com/tpope/vim-eunuch SudoWrite
+Plug 'tpope/vim-eunuch'
+" https://github.com/iamcco/markdown-preview.nvim
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
+Plug 'kristijanhusak/vim-carbon-now-sh'
+Plug 'romainl/ctags-patterns-for-javascript', { 'dir': '$HOME/.ctags-patterns-for-javascript', 'do': 'make tags && echo \"--options=$HOME/.ctags-patterns-for-javascript/ctagsrc\" >> ~/.ctags' }
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -98,7 +115,7 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 " set guifont=Input\ Mono:h13
 " set guifont=Fantasque\ Sans\ Mono:h15
 if has('gui_running')
-  set guifont=RobotoMono\ Nerd\ Font:h13
+  set guifont=Hack\ Nerd\ Font:h13
 endif
 "set guifont=Source\ Code\ Pro:h13
 set number "显示行号
@@ -140,11 +157,13 @@ let g:indent_guides_start_level = 1
 " =============================
 " syntax enable
 " colorscheme solarized
-colorscheme dracula
-" colorscheme iceberg
+" colorscheme dracula
+colorscheme iceberg
 " colorscheme gruvbox
 if has('gui_running')
 	set background=dark
+elseif has('nvim')
+  set termguicolors
 else
   colorscheme seti
 endif
@@ -249,13 +268,19 @@ let g:ag_highlight=1
 " Airline configure
 " =============================
 set laststatus=1
-let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airlien#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts = 1 
+let g:airline#extensions#tabline#tab_nr_type = 0 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 " tabline中buffer显示编号
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline_theme = 'bubblegum'
+let g:airline#extensions#tabline#fnametruncate = 16
+let g:airline#extensions#tabline#fnamecollapse = 2
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_powerline_fonts = 1 
+" let g:airline_theme = 'bubblegum'
 " 映射切换buffer的键位
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
@@ -278,6 +303,7 @@ set nobackup
 set nowb
 set noswapfile
 set noundofile
+set nowritebackup
 
 "==============================
 " EasyMotinon configure
@@ -424,6 +450,10 @@ let g:startify_session_dir = '~/.vim/session'
 let g:startify_bookmarks = [
   \ '~/Code/shimo/shark/package.json',
   \ '~/code/shimo/eagle-develop/package.json',
+  \ '~/Code/shimo/docs-straight-out/docs2html/package.json',
+  \ '~/Code/shimo/svc-docssr/package.json',
+  \ '~/Code/personal/docs-debugger/package.json',
+  \ '~/Code/shimo/doc-doctor/package.json',
   \ '~/.vimrc',
   \ ]
 let g:startify_lists = [
@@ -432,3 +462,174 @@ let g:startify_lists = [
   \ { 'type': 'files',     'header': ['   MRU']            },
   \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
   \ ]
+
+"=============================
+" FastFold
+"=============================
+" 使用语法高亮定义代码折叠
+set foldmethod=syntax
+" 打开文件是默认不折叠代码
+set foldlevelstart=99
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 1
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:ruby_fold = 1
+let g:perl_fold = 1
+let g:perl_fold_blocks = 1
+let g:r_syntax_folding = 1
+let g:rust_fold = 1
+let g:php_folding = 1
+
+"=============================
+" coc.nvim
+" https://github.com/neoclide/coc.nvim
+"=============================
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Better display for messages
+set cmdheight=2
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+
+" Add diagnostic info for https://github.com/itchyny/lightline.vim
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+
+
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+"=============================
+" markdown-preview.nvim
+" https://github.com/iamcco/markdown-preview.nvim
+"=============================
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 1
+let g:mkdp_open_to_the_world = 1
+
+"=============================
+" vim-carbon-now-sh
+" https://github.com/kristijanhusak/vim-carbon-now-sh
+"=============================
+vnoremap <F5> :CarbonNowSh<CR>
+
+"=============================
+" CTags
+"=============================
+let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
