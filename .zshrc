@@ -1,20 +1,17 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 # Path to go
-export GOROOT=/usr/local/go
-export PATH=/usr/local/go/bin:$PATH
-export GOPATH=$HOME/Workspace/go
-export PATH=$PATH:/Users/Sunny/Library/Android/sdk/platform-tools
 export ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
 export SASS_BINARY_SITE=https://npm.taobao.org/mirrors/node-sass/
 export PHANTOMJS_CDNURL=http://cnpmjs.org/downloads
 export PATH=$PATH:/usr/local/sbin
+export PATH=~/.npm-global/bin:$PATH
 export grpc_node_binary_host_mirror=http://npm.taobao.org/mirrors
-export GOROOT=/usr/local/opt/go@1.11
 export PATH=$PATH:$GOROOT/bin
 # export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
 export LDFLAGS="-L/usr/local/opt/openssl/lib";
 export CPPFLAGS="-I/usr/local/opt/openssl/include";
+export TERM="xterm-256color"
 
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
@@ -22,8 +19,6 @@ export CPPFLAGS="-I/usr/local/opt/openssl/include";
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-
-source $HOME/.cargo/env
 
 # npm 自动补全支持
 # npm completion
@@ -141,8 +136,8 @@ alias appfolder='open $(getconf DARWIN_USER_CACHE_DIR)/com.apple.appstore'
 alias ip='ifconfig | grep 192.168.'
 alias lst='lt --host http://sunnyyan.com:2000 --port 3012'
 alias ltwx='lt --host http://adnbe.cn:80 -p 80 -s ngrok'
+alias ponl='export http_proxy=127.0.0.1:8118;export https_proxy=$http_proxy' 
 alias pon='export http_proxy=127.0.0.1:6152;export https_proxy=$http_proxy' 
-alias pons='export http_proxy=127.0.0.1:8123;export https_proxy=$http_proxy' 
 alias poff='unset http_proxy;unset https_proxy'
 alias csh="polipo socksParentProxy=localhost:1080 &"
 alias cdweb="cd /Library/WebServer/Documents"
@@ -169,6 +164,7 @@ alias ssh@doc="ssh yanzhipeng@172.16.20.102"
 alias build-editor="npx lerna run build --scope=@shimo/sdk-document-editor"
 alias build-quill="npx lerna run build --scope=@shimo/sdk-document-quill"
 alias build-comment="npx lerna run build --scope=@shimo/sdk-document-plugin-comment"
+alias music="sudo netease-cloud-music &"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -176,12 +172,10 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_icon ssh dir vcs newline status)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time)
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_CUSTOM_ICON="echo -n '\ue231'"
 POWERLEVEL9K_CUSTOM_ICON_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_ICON_BACKGROUND="yellow"
-source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
-HOMEBREW_FOLDER="/usr/local/share"
-source "$HOMEBREW_FOLDER/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$HOMEBREW_FOLDER/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source ~/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
