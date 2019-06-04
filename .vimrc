@@ -25,6 +25,8 @@ Plug 'trusktr/seti.vim'
 Plug 'dracula/vim'
 Plug 'cocopon/iceberg.vim'
 Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'jacoborus/tender.vim'
 
 " from github
 " for typescript
@@ -110,6 +112,8 @@ execute pathogen#infect()
 
 " 中文乱码问题
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+" 共享系统剪贴板
+set clipboard=unnamed
 
 " set guifont=Source\ Code\ Pro:h13
 " set guifont=Input\ Mono:h13
@@ -158,12 +162,16 @@ let g:indent_guides_start_level = 1
 " syntax enable
 " colorscheme solarized
 " colorscheme dracula
-colorscheme iceberg
+" colorscheme iceberg
 " colorscheme gruvbox
+colorscheme PaperColor
+" colorscheme tender
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
-  set termguicolors
+	set background=dark
+  " set termguicolors
+  " set t_Co=256
 else
   colorscheme seti
 endif
