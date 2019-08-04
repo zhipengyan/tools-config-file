@@ -105,6 +105,7 @@ Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'romainl/ctags-patterns-for-javascript', { 'dir': '$HOME/.ctags-patterns-for-javascript', 'do': 'make tags && echo \"--options=$HOME/.ctags-patterns-for-javascript/ctagsrc\" >> ~/.ctags' }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'wakatime/vim-wakatime'
+Plug 'ianva/vim-youdao-translater'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -641,3 +642,11 @@ vnoremap <F5> :CarbonNowSh<CR>
 " CTags
 "=============================
 let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
+
+"=============================
+" youdao
+" https://github.com/ianva/vim-youdao-translater
+"=============================
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR>
