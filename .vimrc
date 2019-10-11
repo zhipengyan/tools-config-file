@@ -1,3 +1,7 @@
+
+" =====================================================================================
+" ================================== 基本设置开始 =======================================
+" =====================================================================================
 set nocompatible              " be iMproved, required
 filetype off                  " required
 syntax enable
@@ -7,145 +11,32 @@ let g:python3_host_skip_check=1
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
-call plug#begin('~/.vim/plugged')
-
-" let Vundle manage Vundle, required
-Plug 'VundleVim/Vundle.vim'
-Plug 'tpope/vim-sensible'
-Plug 'scrooloose/nerdtree'
-" Plug 'jistr/vim-nerdtree-tabs'
-" colors
-Plug 'altercation/vim-colors-solarized'
-Plug 'tomasr/molokai'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'gilgigilgil/anderson.vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'daylerees/colour-schemes', {'rtp': 'vim/'}
-Plug 'trusktr/seti.vim'
-Plug 'dracula/vim'
-Plug 'cocopon/iceberg.vim'
-Plug 'morhetz/gruvbox'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'jacoborus/tender.vim'
-
-" from github
-" for typescript
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'ianks/vim-tsx'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'Quramy/tsuquyomi'
-" for typescript end
-" es6 an es7 syntax
-Plug 'othree/yajs.vim'
-Plug 'cespare/vim-toml'
-Plug 'stephpy/vim-yaml'
-Plug 'kchmck/vim-coffee-script'
-Plug 'tpope/vim-surround'
-" suojin level xianshi 
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'mattn/emmet-vim'
-Plug 'yonchu/accelerated-smooth-scroll'
-Plug 'othree/tern_for_vim_coffee' " 实现coffee的js代码补全
-Plug 'Lokaltog/vim-powerline'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Lokaltog/vim-easymotion'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'mileszs/ack.vim' " use ag replaced
-Plug 'rking/ag.vim'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
-Plug 'hail2u/vim-css3-syntax'
-Plug 'cakebaker/scss-syntax.vim'
-" Plug 'isRuslan/vim-es6'
-" Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'mbbill/undotree'
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-pathogen'
-" Plug 'scrooloose/syntastic'
-Plug 'w0rp/ale'
-" Plug 'idbrii/AsyncCommand'
-" Plug 'Valloric/YouCompleteMe'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-
-" Plug 'jeetsukumaran/vim-buffergator'
-" Plug 'mihaifm/bufstop'
-Plug 'wavded/vim-stylus'
-" 符号自动补全
-Plug 'Raimondi/delimitMate'
-Plug 'ternjs/tern_for_vim'
-Plug 'tpope/vim-commentary'
-Plug 'terryma/vim-expand-region'
-Plug 'qpkorr/vim-bufkill'
-" fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'maksimr/vim-jsbeautify'
-Plug 'majutsushi/tagbar'
-Plug 'ryanoasis/vim-devicons'
-" git
-Plug 'mhinz/vim-signify'
-" start screen
-Plug 'mhinz/vim-startify'
-" php
-Plug 'StanAngeloff/php.vim'
-" fold
-Plug 'Konfekt/FastFold'
-" https://github.com/tpope/vim-eunuch SudoWrite
-Plug 'tpope/vim-eunuch'
-" https://github.com/iamcco/markdown-preview.nvim
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
-Plug 'kristijanhusak/vim-carbon-now-sh'
-Plug 'romainl/ctags-patterns-for-javascript', { 'dir': '$HOME/.ctags-patterns-for-javascript', 'do': 'make tags && echo \"--options=$HOME/.ctags-patterns-for-javascript/ctagsrc\" >> ~/.ctags' }
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'wakatime/vim-wakatime'
-Plug 'ianva/vim-youdao-translater'
-
-call plug#end()
-filetype plugin indent on    " required
-execute pathogen#infect()
-
 " 中文乱码问题
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 " 共享系统剪贴板
 set clipboard=unnamed
-
-" set guifont=Source\ Code\ Pro:h13
-" set guifont=Input\ Mono:h13
-" set guifont=Fantasque\ Sans\ Mono:h15
-if has('gui_running')
-  set guifont=Hack\ Nerd\ Font:h13
-endif
-"set guifont=Source\ Code\ Pro:h13
 set number "显示行号
-"set guitablabel=\[%N\]\ %t\ %M 
-"set autochdir " 自动切换当前目录为当前文件所在的目录
 set ignorecase smartcase " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
-"set nowrapscan " 禁止在搜索到文件两端时重新搜索
 set incsearch " 输入搜索内容时就显示搜索结果
 set hlsearch " 搜索时高亮显示被找到的文本
 set cursorline " 突出显示当前行
+set lazyredraw " 提高滚动速度
 set ruler " 打开状态栏标尺
 set shiftwidth=2 " 设定 << 和 >> 命令移动时的宽度为 4
 set softtabstop=2 " 使得按退格键时可以一次删掉 4 个空格
 set tabstop=2 " 设定 tab 长度为 4
 set expandtab "设定使用空格代替制表符 用制表符使用noexpandtab
 set smartindent
-set autoindent
-" 针对不同文件设置缩进量
-if has("autocmd")
-  autocmd FileType php set noexpandtab
-	autocmd FileType javascript,typescript,coffee setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType html,ejs,jst,xml,tpl setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd FileType scss,css setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
-endif
+set autoread
+set autoindent " 自动读取本地变更
+au CursorHold * checktime 
 set cursorline cursorcolumn
+" Backup configure
+set nobackup
+set nowb
+set noswapfile
+set noundofile
+set nowritebackup
 " Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
 noremap <leader>y "*y
 noremap <leader>yy "*Y
@@ -153,310 +44,173 @@ noremap <leader>yy "*Y
 " Preserve indentation while pasting text from the OS X clipboard 在粘贴OS
 " X剪贴板中的文本时保留缩进
 noremap <leader>p :set paste<CR>:put *<CR>:set nopaste<CR>
+" set my leader
+let mapleader = ' '
+let g:mapleader = ' '
+" =====================================================================================
+" ================================== 基本设置结束 =======================================
+" =====================================================================================
 
-let g:indent_guides_enable_on_vim_startup = 0
-let g:indent_guides_guide_size=1
-let g:indent_guides_start_level = 1
-"==============================
+
+
+" =====================================================================================
+" ================================== 高级设置开始 =======================================
+" =====================================================================================
+" 针对不同文件设置缩进量
+if has("autocmd")
+  autocmd FileType php set noexpandtab
+	autocmd FileType javascript,typescript,coffee setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType html,ejs,jst,xml,tpl setlocal ts=4 sts=4 sw=4 expandtab
+	autocmd FileType scss,css setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
+  autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+  autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+endif
+
+" 设置字体字号
+if has('gui_running')
+  " set guifont=Source\ Code\ Pro:h13
+  " set guifont=Input\ Mono:h13
+  " set guifont=Fantasque\ Sans\ Mono:h15
+  set guifont=Hack\ Nerd\ Font:h13
+endif
+" 跳转到上一个打开的 buffer
+nnoremap <c-6> :bp<cr>
+" 打开 buffer 列表
+map <leader>b :Buffers<CR>
+filetype plugin indent on    " required
+" =====================================================================================
+" ================================== 高级设置结束 =======================================
+" =====================================================================================
+
+
+call plug#begin('~/.vim/plugged')
+
+" 一些 vim 的通用配置简单设置
+" https://github.com/tpope/vim-sensible
+Plug 'tpope/vim-sensible'
+
+" 配色方案
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'gilgigilgil/anderson.vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'trusktr/seti.vim'
+Plug 'dracula/vim'
+Plug 'cocopon/iceberg.vim'
+Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'jacoborus/tender.vim'
+
+" 代码目录
+Plug 'scrooloose/nerdtree'
+" 文件图标
+Plug 'ryanoasis/vim-devicons'
+" 首屏导航
+Plug 'mhinz/vim-startify'
+" 状态栏
+Plug 'vim-airline/vim-airline'
+" 文件快速导航
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" 全文搜索工具
+Plug 'rking/ag.vim'
+" lsp 远程语言服务
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" 符号自动补全
+Plug 'Raimondi/delimitMate'
+" 注释工具
+Plug 'tpope/vim-commentary'
+" git 工具集
+Plug 'tpope/vim-fugitive'
+" https://github.com/tpope/vim-eunuch SudoWrite Delete Chmod
+Plug 'tpope/vim-eunuch'
+" 两边补齐符号
+Plug 'tpope/vim-surround'
+" 快速定位
+Plug 'Lokaltog/vim-easymotion'
+" 选区助手
+Plug 'terryma/vim-expand-region'
+
+" ================================= 语言类型支持开始 =====================================
+" javascript 语言相关
+Plug 'pangloss/vim-javascript'
+" jsx 语法
+Plug 'maxmellon/vim-jsx-pretty'
+" es6 es7 syntax
+" Plug 'othree/yajs.vim'
+
+" stylus scss 变种
+Plug 'wavded/vim-stylus'
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'cakebaker/scss-syntax.vim'
+
+Plug 'cespare/vim-toml'
+Plug 'stephpy/vim-yaml'
+" typescript
+Plug 'leafgarland/typescript-vim'
+" typescript 高亮
+Plug 'HerringtonDarkholme/yats.vim'
+" styled-components 语法支持
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" ================================ 语言类型支持结束 ======================================
+
+" 生成代码截图
+" Plug 'kristijanhusak/vim-carbon-now-sh'
+" 统计写代码时长
+" Plug 'wakatime/vim-wakatime'
+
+call plug#end()
+
+
+
+
+" =====================================================================================
+" ================================== 插件设置开始 =======================================
+" =====================================================================================
+
+" =============================
 " 设置配色方案
 " =============================
-" syntax enable
-" colorscheme solarized
-" colorscheme dracula
-" colorscheme iceberg
-" colorscheme gruvbox
-colorscheme PaperColor
-" colorscheme tender
+colorscheme dracula
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
 	set background=dark
-  " set termguicolors
-  " set t_Co=256
 else
   colorscheme seti
 endif
-
-" molokai
-" colorscheme molokai
-"let g:molokai_original = 1
-"let g:rehash256 = 1
-
-" hybrid_material
-" colorscheme hybrid_material
-" let g:enable_bold_font = 1
-
-" anderson
-"if has('gui_running')
-"  colorscheme anderson
-"else
-"  colorscheme hybrid_material
-"endif
-
-" hybrid
-" colorscheme hybrid
-
-" seti ui
-" colorscheme seti
-
-"colorscheme slime
-"设置输入法切换
-"set noimdisable
-"autocmd! InsertLeave * set imdisable|set iminsert=0
-"autocmd! InsertEnter * set noimdisable|set iminsert=0
-"set imdisable
-"set imactivatekey=D-space
-"set imsearch=0
-"set imcmdline=0
-"autocmd! CompleteDone * set imdisable|set iminsert=0 "for macvim
-
-"==============================
-" set my leader
 " =============================
-" let mapleader=","
-" let g:mapleader=","
-let mapleader = ' '
-let g:mapleader = ' '
-
-"==============================
 " NerdTree configure
+" https://github.com/scrooloose/nerdtree
 " =============================
 let NERDTreeQuitOnOpen = 1
 let NERDChristmasTree = 1
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize = 40
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_Store$']
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 map <leader><leader> :NERDTreeToggle<CR>
 map <leader>n :NERDTreeFind<CR>
-
-"==============================
-" NerdTreeTabs configure
-" =============================
-" let g:nerdtree_tabs_open_on_console_startup=1
-" let g:nerdtree_tabs_open_on_gui_startup=1
-" map <Leader>, <plug>NERDTreeTabsToggle<CR>
-
-
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
-nnoremap <leader>p :GFiles<cr>
-
-"==============================
-" Ack configure
-" =============================
-" nmap <leader>/ :tab split<CR>:Ack ""<left>
-" nmap <leader>A :tab split<CR>:Ack <C-r><C-w><CR>
-" let g:ackprg = 'rg --line-number --column --ignore-case --hidden --follow --glob "!.git/*" --color'
-"" let g:ackprg = 'ag --nogroup --nocolor --column'
-
-"==============================
-" Ag configure
-" =============================
-nmap <leader>/ :tab split<CR>:Ag ""<left>
-nmap <leader>A :tab split<CR>:Ag <C-r><C-w><CR>
-let g:ag_prg = 'rg --line-number --vimgrep --column --smart-case --colors "line:style:bold" --hidden --follow --glob "!.git/*"'
-let g:ag_working_path_mode="r"
-let g:ag_highlight=1
-
-"==============================
-" Powerline configure
-" =============================
-" set laststatus=2
-" let g:Powerline_symbols='unicode'
-
-"==============================
-" Airline configure
-" =============================
-set laststatus=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airlien#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#tab_nr_type = 0 " tab number
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-" tabline中buffer显示编号
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#fnametruncate = 16
-let g:airline#extensions#tabline#fnamecollapse = 2
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline_powerline_fonts = 1 
-" let g:airline_theme = 'bubblegum'
-" 映射切换buffer的键位
-nnoremap [b :bp<CR>
-nnoremap ]b :bn<CR>
-" 映射<leader>num到num buffer
-map <leader>1 :b 1<CR>
-map <leader>2 :b 2<CR>
-map <leader>3 :b 3<CR>
-map <leader>4 :b 4<CR>
-map <leader>5 :b 5<CR>
-map <leader>6 :b 6<CR>
-map <leader>7 :b 7<CR>
-map <leader>8 :b 8<CR>
-map <leader>9 :b 9<CR>
-
-
-"==============================
-" Backup configure
-" =============================
-set nobackup
-set nowb
-set noswapfile
-set noundofile
-set nowritebackup
-
-"==============================
-" EasyMotinon configure
-" =============================
-let g:EasyMotion_leader_key=','
-
-"==============================
-" Syntastic configure
-" =============================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-map <leader>l :lopen<CR>
-map <leader>L :lclose<CR>
-
-" if has("autocmd")
-"   autocmd FileType javascript let b:syntatic_checkers = ['eslint']
-" endif
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_eslint_exec = 'node_modules/.bin/eslint'
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_typescript_tslint_exec = 'node_modules/.bin/tslint'
-let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_typescriptreact_tslint_exec = 'node_modules/.bin/tslint'
-let g:syntastic_typescriptreact_checkers = ['tslint']
-let g:syntastic_disabled_filetypes=['html']
-" let g:syntastic_debug = 3
-
-let g:syntastic_error_symbol = '💥'
-let g:syntastic_warning_symbol = '🔅'
-let g:syntastic_style_error_symbol = '😡'
-let g:syntastic_style_warning_symbol = '😯'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
-"=============================
-" ale configure
-"=============================
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
-\   'typescriptreact': ['tslint'],
-\}
-let g:ale_sign_error = '💥'
-let g:ale_sign_warning = '🔅'
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 1
-let g:ale_lint_on_enter = 0
-let g:airline#extensions#ale#enabled = 1
-
-"=============================
-" undotree configure
-"=============================
-if has("persistent_undo")
-  set undodir=~/.undodir/
-  set undofile
-endif
-nnoremap <F5> :UndotreeToggle<cr>
-
-"=============================
-" easy-align configure
-"=============================
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-"=============================
-" delimitMate configure
-" auto indent wrap
-"=============================
-let delimitMate_expand_cr = 1
-
-"=============================
-" vim-javascript configure
-"=============================
-let g:javascript_plugin_jsdoc = 1
-
-"=============================
-" vim-expand-region configure
-"=============================
-map <leader>k <Plug>(expand_region_expand)
-map <leader>j <Plug>(expand_region_shrink)
-
-
-"=============================
-" typescript configure
-"=============================
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
-autocmd FileType typescript setlocal completeopt+=menu,preview
-let g:tsuquyomi_completion_detail = 1
-let g:typescript_indent_disable = 1
-
-
-"=============================
-" switch to last buffer
-"=============================
-nnoremap <c-6> :bp<cr>
-
-"=============================
-" buffer
-"=============================
-map <leader>b :Buffers<CR>
-
-"=============================
-" js-beautify
-"=============================
-map <c-f> :call JsBeautify()<cr>
-
-"=============================
-" tagbar
-"=============================
-nmap <leader>t :TagbarToggle<CR>
-
-"=============================
+" ============================
 " devicons
+" https://github.com/ryanoasis/vim-devicons
 "=============================
-" loading the plugin
 let g:webdevicons_enable = 1
-" adding the flags to NERDTree
 let g:webdevicons_enable_nerdtree = 1
-" adding to vim-airline's tabline
 let g:webdevicons_enable_airline_tabline = 1
-" adding to vim-airline's statusline
 let g:webdevicons_enable_airline_statusline = 1
 let g:airline_powerline_fonts = 1
-
-"=============================
+" ============================
 " startify
+" https://github.com/mhinz/vim-startify
 "=============================
 nmap <leader>h :Startify<CR>
 let g:startify_session_dir = '~/.vim/session'
 let g:startify_bookmarks = [
+  \ '~/Code/personal/yunduo/package.json',
   \ '~/Code/shimo/shark/package.json',
   \ '~/code/shimo/eagle-develop/package.json',
   \ '~/Code/shimo/docs-straight-out/docs2html/package.json',
@@ -471,31 +225,50 @@ let g:startify_lists = [
   \ { 'type': 'files',     'header': ['   MRU']            },
   \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
   \ ]
-
+" =============================
+" Airline configure
+" https://github.com/vim-airline/vim-airline
+" =============================
+set laststatus=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airlien#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#tab_nr_type = 0 " tab number
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+" tabline中buffer显示编号
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#fnametruncate = 16
+let g:airline#extensions#tabline#fnamecollapse = 2
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline_powerline_fonts = 1 
+" 映射切换buffer的键位
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
+" =============================
+" fzf configure
+" https://github.com/junegunn/fzf.vim
+" https://github.com/junegunn/fzf
+" =============================
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+nnoremap <leader>p :GFiles<cr>
+" =============================
+" Ag configure
+" =============================
+nmap <leader>/ :tab split<CR>:Ag ""<left>
+nmap <leader>A :tab split<CR>:Ag <C-r><C-w><CR>
+let g:ag_prg = 'rg --line-number --vimgrep --column --smart-case --colors "line:style:bold" --hidden --follow --glob "!.git/*"'
+let g:ag_working_path_mode="r"
+let g:ag_highlight=1
+" =============================
+" EasyMotinon configure
+" =============================
+let g:EasyMotion_leader_key='<space>'
 "=============================
-" FastFold
+" vim-carbon-now-sh
+" https://github.com/kristijanhusak/vim-carbon-now-sh
 "=============================
-" 使用语法高亮定义代码折叠
-set foldmethod=syntax
-" 打开文件是默认不折叠代码
-set foldlevelstart=99
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-
-let g:markdown_folding = 1
-let g:tex_fold_enabled = 1
-let g:vimsyn_folding = 'af'
-let g:xml_syntax_folding = 1
-let g:javaScript_fold = 1
-let g:sh_fold_enabled= 7
-let g:ruby_fold = 1
-let g:perl_fold = 1
-let g:perl_fold_blocks = 1
-let g:r_syntax_folding = 1
-let g:rust_fold = 1
-let g:php_folding = 1
+vnoremap <F5> :CarbonNowSh<CR>
 
 "=============================
 " coc.nvim
@@ -528,6 +301,9 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" coc extensions
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-tsserver', 'coc-git']
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -622,31 +398,3 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-"=============================
-" markdown-preview.nvim
-" https://github.com/iamcco/markdown-preview.nvim
-"=============================
-" set to 1, nvim will open the preview window after entering the markdown buffer
-" default: 0
-let g:mkdp_auto_start = 1
-let g:mkdp_open_to_the_world = 1
-
-"=============================
-" vim-carbon-now-sh
-" https://github.com/kristijanhusak/vim-carbon-now-sh
-"=============================
-vnoremap <F5> :CarbonNowSh<CR>
-
-"=============================
-" CTags
-"=============================
-let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
-
-"=============================
-" youdao
-" https://github.com/ianva/vim-youdao-translater
-"=============================
-vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-nnoremap <silent> <C-T> :<C-u>Ydc<CR>
-noremap <leader>yd :<C-u>Yde<CR>
