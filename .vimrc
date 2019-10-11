@@ -37,6 +37,7 @@ set nowb
 set noswapfile
 set noundofile
 set nowritebackup
+set autochdir " 自动切换工作目录
 " Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
 noremap <leader>y "*y
 noremap <leader>yy "*Y
@@ -67,6 +68,9 @@ if has("autocmd")
 endif
 
 " 设置字体字号
+if (!empty($NVIM_GUI))
+  set guifont=Source\ Code\ Pro:h12
+endif
 if has('gui_running')
   " set guifont=Source\ Code\ Pro:h13
   " set guifont=Input\ Mono:h13
@@ -173,7 +177,7 @@ call plug#end()
 " =============================
 " 设置配色方案
 " =============================
-colorscheme dracula
+colorscheme molokai
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
@@ -230,7 +234,9 @@ let g:startify_lists = [
 " https://github.com/vim-airline/vim-airline
 " =============================
 set laststatus=1
-let g:airline#extensions#tabline#enabled = 1
+if (empty($NVIM_GUI))
+  let g:airline#extensions#tabline#enabled = 1
+endif
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airlien#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#tab_nr_type = 0 " tab number
@@ -263,7 +269,7 @@ let g:ag_highlight=1
 " =============================
 " EasyMotinon configure
 " =============================
-let g:EasyMotion_leader_key='<space>'
+let g:EasyMotion_leader_key=','
 "=============================
 " vim-carbon-now-sh
 " https://github.com/kristijanhusak/vim-carbon-now-sh
