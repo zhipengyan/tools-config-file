@@ -105,6 +105,12 @@ Plug 'cocopon/iceberg.vim'
 Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'jacoborus/tender.vim'
+Plug 'KKPMW/sacredforest-vim'
+Plug 'sainnhe/vim-color-forest-night'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'chriskempson/base16-vim'
+Plug 'mhartington/oceanic-next'
+Plug 'flazz/vim-colorschemes'
 
 " 代码目录
 Plug 'scrooloose/nerdtree'
@@ -114,6 +120,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 " 状态栏
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " 文件快速导航
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -177,7 +184,8 @@ call plug#end()
 " =============================
 " 设置配色方案
 " =============================
-colorscheme molokai
+set termguicolors
+colorscheme OceanicNext
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
@@ -234,6 +242,8 @@ let g:startify_lists = [
 " https://github.com/vim-airline/vim-airline
 " =============================
 set laststatus=1
+" let g:airline_theme = 'base16'
+let g:airline_theme = 'oceanicnext'
 if (empty($NVIM_GUI))
   let g:airline#extensions#tabline#enabled = 1
 endif
@@ -309,7 +319,7 @@ function! s:check_back_space() abort
 endfunction
 
 " coc extensions
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-eslint', 'coc-tsserver', 'coc-git']
+let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-git']
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -340,7 +350,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
