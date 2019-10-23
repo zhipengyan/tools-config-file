@@ -27,8 +27,9 @@ set softtabstop=2 " 使得按退格键时可以一次删掉 4 个空格
 set tabstop=2 " 设定 tab 长度为 4
 set expandtab "设定使用空格代替制表符 用制表符使用noexpandtab
 set smartindent
+" 自动读取本地变更
 set autoread
-set autoindent " 自动读取本地变更
+set autoindent
 au CursorHold * checktime 
 set cursorline cursorcolumn
 " Backup configure
@@ -37,7 +38,7 @@ set nowb
 set noswapfile
 set noundofile
 set nowritebackup
-set autochdir " 自动切换工作目录
+" set autochdir " 自动切换工作目录
 " Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
 noremap <leader>y "*y
 noremap <leader>yy "*Y
@@ -60,7 +61,7 @@ let g:mapleader = ' '
 " 针对不同文件设置缩进量
 if has("autocmd")
   autocmd FileType php set noexpandtab
-	autocmd FileType javascript,typescript,coffee setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType javascript,typescript,typescriptreact,coffee setlocal ts=2 sts=2 sw=2 expandtab
 	autocmd FileType html,ejs,jst,xml,tpl setlocal ts=4 sts=4 sw=4 expandtab
 	autocmd FileType scss,css setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
@@ -126,6 +127,17 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " 全文搜索工具
 Plug 'rking/ag.vim'
+" lint 工具
+Plug 'dense-analysis/ale'
+" 自动补全
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-cssomni'
+Plug 'ncm2/ncm2-tern', {'do': 'npm install'}
+Plug 'ncm2/ncm2-vim'
+" 异步进程管理，配合 ncm2
+Plug 'roxma/nvim-yarp'
 
 " 符号自动补全
 Plug 'Raimondi/delimitMate'
@@ -161,6 +173,8 @@ Plug 'stephpy/vim-yaml'
 Plug 'leafgarland/typescript-vim'
 " typescript 高亮
 Plug 'HerringtonDarkholme/yats.vim'
+" typescript lsp 支持
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 " styled-components 语法支持
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 " ================================ 语言类型支持结束 ======================================
@@ -274,6 +288,32 @@ nmap <leader>A :tab split<CR>:Ag <C-r><C-w><CR>
 let g:ag_prg = 'rg --line-number --vimgrep --column --smart-case --colors "line:style:bold" --hidden --follow --glob "!.git/*"'
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
+" =============================
+" Ale
+" https://github.com/dense-analysis/ale
+" =============================
+let g:ale_completion_tsserver_autoimport = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_list_window_size = 5
+let b:ale_linters = {
+  \ 'javascript': ['eslint'],
+  \ 'javascriptreact': ['eslint'],
+  \ 'javascript.jsx': ['eslint'],
+  \ 'typescript': ['eslint'],
+  \ 'typescriptreact': ['eslint'],
+  \ 'typescript.tsx': ['eslint']
+  \ }
+nmap <leader>d :ALEGoToDefinition<CR>
+" =============================
+" ncm2 configure
+" https://github.com/ncm2/ncm2
+" =============================
+autocmd BufEnter * call ncm2#enable_for_buffer()
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " =============================
 " EasyMotinon configure
 " =============================
