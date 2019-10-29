@@ -294,15 +294,17 @@ let g:ag_highlight=1
 " =============================
 let g:ale_completion_tsserver_autoimport = 1
 let g:airline#extensions#ale#enabled = 1
+" 明确使用哪个 linter，避免使用 eslint 检查 ts 文件还有 tslint 信息抛出
 let g:ale_list_window_size = 5
-let b:ale_linters = {
-  \ 'javascript': ['eslint'],
-  \ 'javascriptreact': ['eslint'],
-  \ 'javascript.jsx': ['eslint'],
-  \ 'typescript': ['eslint'],
-  \ 'typescriptreact': ['eslint'],
-  \ 'typescript.tsx': ['eslint']
-  \ }
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'javascriptreact': ['eslint'],
+\   'javascript.jsx': ['eslint'],
+\   'typescript': ['eslint'],
+\   'typescriptreact': ['eslint'],
+\   'typescript.tsx': ['eslint'],
+\}
+let g:ale_linters_explicit = 1
 nmap <leader>d :ALEGoToDefinition<CR>
 " =============================
 " ncm2 configure
