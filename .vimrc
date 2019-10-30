@@ -127,17 +127,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " 全文搜索工具
 Plug 'rking/ag.vim'
-" lint 工具
-Plug 'dense-analysis/ale'
-" 自动补全
-Plug 'ncm2/ncm2'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-cssomni'
-Plug 'ncm2/ncm2-tern', {'do': 'npm install'}
-Plug 'ncm2/ncm2-vim'
-" 异步进程管理，配合 ncm2
+" 异步进程管理
 Plug 'roxma/nvim-yarp'
+" 语言服务器
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " 符号自动补全
 Plug 'Raimondi/delimitMate'
@@ -174,7 +167,7 @@ Plug 'leafgarland/typescript-vim'
 " typescript 高亮
 Plug 'HerringtonDarkholme/yats.vim'
 " typescript lsp 支持
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+" Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 " styled-components 语法支持
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 " ================================ 语言类型支持结束 ======================================
@@ -289,33 +282,37 @@ let g:ag_prg = 'rg --line-number --vimgrep --column --smart-case --colors "line:
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
 " =============================
-" Ale
-" https://github.com/dense-analysis/ale
+" coc.vim configure
+" https://github.com/neoclide/coc.nvim
 " =============================
-let g:ale_completion_tsserver_autoimport = 1
-let g:airline#extensions#ale#enabled = 1
-" 明确使用哪个 linter，避免使用 eslint 检查 ts 文件还有 tslint 信息抛出
-let g:ale_list_window_size = 5
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'javascriptreact': ['eslint'],
-\   'javascript.jsx': ['eslint'],
-\   'typescript': ['eslint'],
-\   'typescriptreact': ['eslint'],
-\   'typescript.tsx': ['eslint'],
-\}
-let g:ale_linters_explicit = 1
-nmap <leader>d :ALEGoToDefinition<CR>
-" =============================
-" ncm2 configure
-" https://github.com/ncm2/ncm2
-" =============================
-autocmd BufEnter * call ncm2#enable_for_buffer()
-" IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-" Use <TAB> to select the popup menu:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" tab 键切换补全的选项
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nnoremap <silent> <space>f  :<C-u>CocList files<cr>
+nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
+nnoremap <silent> <space>g  :<C-u>CocList grep<cr>
+
 " =============================
 " EasyMotinon configure
 " =============================
