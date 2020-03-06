@@ -14,12 +14,13 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " 中文乱码问题
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 " 共享系统剪贴板
-set clipboard=unnamed
+" set clipboard=unnamed
 set number "显示行号
 set ignorecase smartcase " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
 set incsearch " 输入搜索内容时就显示搜索结果
 set hlsearch " 搜索时高亮显示被找到的文本
 set cursorline " 突出显示当前行
+" set cursorline cursorcolumn
 set lazyredraw " 提高滚动速度
 set ruler " 打开状态栏标尺
 set shiftwidth=2 " 设定 << 和 >> 命令移动时的宽度为 4
@@ -31,24 +32,25 @@ set smartindent
 set autoread
 set autoindent
 au CursorHold * checktime 
-set cursorline cursorcolumn
 " Backup configure
 set nobackup
 set nowb
 set noswapfile
 set noundofile
 set nowritebackup
+" set my leader
+let mapleader = ' '
+let g:mapleader = ' '
+" Preserve indentation while pasting text from the OS X clipboard 在粘贴OS
+" X剪贴板中的文本时保留缩进
+noremap <leader>p :set paste<CR>:put *<CR>:set nopaste<CR>
 " set autochdir " 自动切换工作目录
 " Yank text to the OS X clipboard" 将文本复制到OS X剪贴板中
 noremap <leader>y "*y
 noremap <leader>yy "*Y
-"  
-" Preserve indentation while pasting text from the OS X clipboard 在粘贴OS
-" X剪贴板中的文本时保留缩进
-noremap <leader>p :set paste<CR>:put *<CR>:set nopaste<CR>
-" set my leader
-let mapleader = ' '
-let g:mapleader = ' '
+inoremap jk <esc>
+cnoremap jk <esc>
+inoremap <esc> <nop>
 " =====================================================================================
 " ================================== 基本设置结束 =======================================
 " =====================================================================================
@@ -61,9 +63,9 @@ let g:mapleader = ' '
 " 针对不同文件设置缩进量
 if has("autocmd")
   autocmd FileType php set noexpandtab
-	autocmd FileType javascript,typescript,typescriptreact,coffee setlocal ts=2 sts=2 sw=2 expandtab
-	autocmd FileType html,ejs,jst,xml,tpl setlocal ts=4 sts=4 sw=4 expandtab
-	autocmd FileType scss,css setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
+  autocmd FileType javascript,typescript,typescriptreact,coffee setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType html,ejs,jst,xml,tpl setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd FileType scss,css setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 endif
@@ -112,9 +114,12 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'chriskempson/base16-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'flazz/vim-colorschemes'
+Plug 'joshdick/onedark.vim'
 
 " 代码目录
 Plug 'scrooloose/nerdtree'
+" 目录高亮
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " 文件图标
 Plug 'ryanoasis/vim-devicons'
 " 首屏导航
@@ -169,7 +174,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 " typescript lsp 支持
 " Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 " styled-components 语法支持
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+" Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 " ================================ 语言类型支持结束 ======================================
 
 " 生成代码截图
@@ -190,7 +195,8 @@ call plug#end()
 " 设置配色方案
 " =============================
 set termguicolors
-colorscheme OceanicNext
+" colorscheme OceanicNext
+colorscheme onedark
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
@@ -211,6 +217,12 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 map <leader><leader> :NERDTreeToggle<CR>
 map <leader>n :NERDTreeFind<CR>
+" =============================
+" NerdTree highlight configure
+" https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
+" =============================
+let g:NERDTreeExtensionHighlightColor = {}
+let g:NERDTreeExtensionHighlightColor['ts'] = '4B9AD6'
 " ============================
 " devicons
 " https://github.com/ryanoasis/vim-devicons
@@ -248,7 +260,8 @@ let g:startify_lists = [
 " =============================
 set laststatus=1
 " let g:airline_theme = 'base16'
-let g:airline_theme = 'oceanicnext'
+" let g:airline_theme = 'oceanicnext'
+let g:airline_theme = 'onedark'
 if (empty($NVIM_GUI))
   let g:airline#extensions#tabline#enabled = 1
 endif
@@ -312,6 +325,7 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> <space>f  :<C-u>CocList files<cr>
 nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
 nnoremap <silent> <space>g  :<C-u>CocList grep<cr>
+nnoremap <silent> <space>w  :<C-u>CocList words<cr>
 
 " =============================
 " EasyMotinon configure
