@@ -15,6 +15,7 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 " 共享系统剪贴板
 " set clipboard=unnamed
+set hidden
 set number "显示行号
 set ignorecase smartcase " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
 set incsearch " 输入搜索内容时就显示搜索结果
@@ -115,6 +116,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
+Plug 'ayu-theme/ayu-vim'
 
 " 代码目录
 Plug 'scrooloose/nerdtree'
@@ -151,6 +153,8 @@ Plug 'tpope/vim-surround'
 Plug 'Lokaltog/vim-easymotion'
 " 选区助手
 Plug 'terryma/vim-expand-region'
+" 选区复制后高亮
+Plug 'machakann/vim-highlightedyank'
 
 " ================================= 语言类型支持开始 =====================================
 " javascript 语言相关
@@ -175,6 +179,10 @@ Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 " styled-components 语法支持
 " Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
+" rust
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 " ================================ 语言类型支持结束 ======================================
 
 " 生成代码截图
@@ -195,8 +203,10 @@ call plug#end()
 " 设置配色方案
 " =============================
 set termguicolors
-" colorscheme OceanicNext
-colorscheme onedark
+colorscheme OceanicNext
+" colorscheme onedark
+" let ayucolor="mirage" " for mirage version of theme
+" colorscheme ayu
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
@@ -232,6 +242,7 @@ let g:webdevicons_enable_nerdtree = 1
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#show_tabs = 1
 " ============================
 " startify
 " https://github.com/mhinz/vim-startify
