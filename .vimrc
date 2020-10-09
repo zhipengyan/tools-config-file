@@ -117,6 +117,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 " 代码目录
 Plug 'scrooloose/nerdtree'
@@ -203,7 +204,8 @@ call plug#end()
 " 设置配色方案
 " =============================
 set termguicolors
-colorscheme OceanicNext
+colorscheme PaperColor
+" colorscheme OceanicNext
 " colorscheme onedark
 " let ayucolor="mirage" " for mirage version of theme
 " colorscheme ayu
