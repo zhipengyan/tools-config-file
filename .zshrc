@@ -17,6 +17,8 @@ export LDFLAGS="-L/usr/local/opt/openssl/lib";
 export CPPFLAGS="-I/usr/local/opt/openssl/include";
 export HOMEBREW_NO_AUTO_UPDATE=1
 export LESSCHARSET=utf-8
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
 export N_NODE_MIRROR=https://npm.taobao.org/mirrors/node
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -71,6 +73,8 @@ alias ssh@deploy="ssh yanzhipeng@139.219.0.67"
 alias ssh@idoc="ssh -p 2333  idoc@shimo.f3322.net"
 alias ssh@test="ssh test@172.16.20.168"
 alias ssh@doc="ssh yanzhipeng@172.16.20.102"
+alias gitLocal="git config --local user.name 'yanzhipeng' && git config --local user.email 'yanzhipeng@shimo.im'"
+alias gitGlobal="git config --global user.name 'zhipengyan' && git config --local user.email 'yanzhipeng2012@gmail.com'"
 
 [ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
 source ~/.zplug/init.zsh
