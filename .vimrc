@@ -39,6 +39,7 @@ set nowb
 set noswapfile
 set noundofile
 set nowritebackup
+set t_Co=256
 " set my leader
 let mapleader = ' '
 let g:mapleader = ' '
@@ -204,8 +205,8 @@ call plug#end()
 " 设置配色方案
 " =============================
 set termguicolors
-colorscheme PaperColor
-" colorscheme OceanicNext
+" colorscheme PaperColor
+colorscheme OceanicNext
 " colorscheme onedark
 " let ayucolor="mirage" " for mirage version of theme
 " colorscheme ayu
