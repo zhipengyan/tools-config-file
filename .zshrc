@@ -21,6 +21,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export N_NODE_MIRROR=https://npm.taobao.org/mirrors/node
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.cloud.tencent.com/homebrew-bottles
 
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
