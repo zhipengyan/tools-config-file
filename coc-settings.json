@@ -1,0 +1,18 @@
+{
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx"
+  ],
+  "tsserver.enableJavascript": false,
+  "list.source.files.args": [
+    "--hidden",
+    "--files"
+  ],
+  "list.maxHeight": 30,
+  "list.source.grep.args": [
+    "--smart-case"
+  ]
+}
