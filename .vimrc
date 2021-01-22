@@ -141,7 +141,7 @@ Plug 'rking/ag.vim'
 " 异步进程管理
 Plug 'roxma/nvim-yarp'
 " 语言服务器
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " floaterm
 Plug 'voldikss/vim-floaterm'
 Plug 'ptzz/lf.vim'
@@ -342,38 +342,6 @@ nmap <leader>A :tab split<CR>:Ag <C-r><C-w><CR>
 let g:ag_prg = 'rg --line-number --vimgrep --column --smart-case --colors "line:style:bold" --hidden --follow --glob "!.git/*"'
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
-" =============================
-" coc.vim configure
-" https://github.com/neoclide/coc.nvim
-" =============================
-" tab 键切换补全的选项
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" nnoremap <silent> <space>f  :<C-u>CocList files<cr>
-nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
-nnoremap <silent> <space>g  :<C-u>CocList grep<cr>
-nnoremap <silent> <space>w  :<C-u>CocList words<cr>
 
 " =============================
 " EasyMotinon configure
