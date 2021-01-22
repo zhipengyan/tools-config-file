@@ -33,6 +33,7 @@ set smartindent
 set autoread
 set autoindent
 au CursorHold * checktime 
+au BufNewFile,BufRead Jenkinsfile setf groovy
 " Backup configure
 set nobackup
 set nowb
@@ -68,6 +69,7 @@ if has("autocmd")
   autocmd FileType javascript,typescript,typescriptreact,coffee setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType html,ejs,jst,xml,tpl setlocal ts=4 sts=4 sw=4 expandtab
   autocmd FileType scss,css setlocal ts=2 sts=2 sw=2 expandtab iskeyword+=-
+  autocmd FileType Jenkinsfile setlocal ts=4 sts=4 sw=4 expandtab
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 endif
@@ -121,9 +123,9 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'NLKNguyen/papercolor-theme'
 
 " 代码目录
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " 目录高亮
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  'NERDTreeToggle' }
 " 文件图标
 Plug 'ryanoasis/vim-devicons'
 " 首屏导航
@@ -140,6 +142,14 @@ Plug 'rking/ag.vim'
 Plug 'roxma/nvim-yarp'
 " 语言服务器
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" floaterm
+Plug 'voldikss/vim-floaterm'
+Plug 'ptzz/lf.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'mcchrish/nnn.vim'
+Plug 'dylanaraps/fff.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 
 " 符号自动补全
 Plug 'Raimondi/delimitMate'
@@ -157,6 +167,11 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'terryma/vim-expand-region'
 " 选区复制后高亮
 Plug 'machakann/vim-highlightedyank'
+" 自动分行
+Plug 'AndrewRadev/splitjoin.vim'
+" prettier
+" Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'sbdchd/neoformat'
 
 " ================================= 语言类型支持开始 =====================================
 " javascript 语言相关
@@ -185,12 +200,17 @@ Plug 'HerringtonDarkholme/yats.vim'
 " rust
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+" jenkins
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'vim-scripts/groovyindent-unix'
 " ================================ 语言类型支持结束 ======================================
 
 " 生成代码截图
 " Plug 'kristijanhusak/vim-carbon-now-sh'
 " 统计写代码时长
 " Plug 'wakatime/vim-wakatime'
+" MD 生成 Slide
+Plug 'dhruvasagar/vim-marp'
 
 call plug#end()
 
@@ -218,6 +238,20 @@ else
   colorscheme seti
 endif
 " =============================
+" floaterm configure
+"
+" =============================
+" 禁用 nnn 的默认映射
+let g:nnn#set_default_mappings = 0
+" 禁用 lf 的默认映射
+let g:lf_map_keys = 0
+" 禁用 ranger 的默认映射
+let g:ranger_map_keys = 0
+map <leader><leader> :FloatermNew nnn -H<CR>
+map <leader>n :FloatermNew nnn -H %:p:h<CR>
+map <leader>f :FloatermNew fzf<CR>
+map <leader>c :FloatermNew<CR>
+" =============================
 " NerdTree configure
 " https://github.com/scrooloose/nerdtree
 " =============================
@@ -228,8 +262,8 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.DS_Store$']
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-map <leader><leader> :NERDTreeToggle<CR>
-map <leader>n :NERDTreeFind<CR>
+" map <leader><leader> :NERDTreeToggle<CR>
+" map <leader>n :NERDTreeFind<CR>
 " =============================
 " NerdTree highlight configure
 " https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
@@ -336,7 +370,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> <space>f  :<C-u>CocList files<cr>
+" nnoremap <silent> <space>f  :<C-u>CocList files<cr>
 nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
 nnoremap <silent> <space>g  :<C-u>CocList grep<cr>
 nnoremap <silent> <space>w  :<C-u>CocList words<cr>
@@ -350,3 +384,10 @@ let g:EasyMotion_leader_key=','
 " https://github.com/kristijanhusak/vim-carbon-now-sh
 "=============================
 vnoremap <F5> :CarbonNowSh<CR>
+
+" =============================
+" EasyMotinon configure
+" =============================
+nmap -- :Neoformat prettier<CR>
+
+command! PP !npx prettier --write %
