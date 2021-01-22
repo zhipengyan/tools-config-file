@@ -56,7 +56,7 @@ local focus_mash = {"ctrl"}
 
 -------------------- launch ----------------------
 local launch_mash = {"cmd"}
-hs.hotkey.bind(launch_mash, "0", function() ext.app.forceLaunchOrFocus("Dingtalk") end)
+hs.hotkey.bind(launch_mash, "0", function() ext.app.forceLaunchOrFocus("企业微信") end)
 hs.hotkey.bind(launch_mash, "1", function() ext.app.forceLaunchOrFocus("Finder") end)
 -- hs.hotkey.bind(launch_mash, "2", function() ext.app.forceLaunchOrFocus("QQ") end)
 hs.hotkey.bind(launch_mash, "2", function() ext.app.forceLaunchOrFocus("2Do") end)
