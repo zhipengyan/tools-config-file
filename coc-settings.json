@@ -4,9 +4,10 @@
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "typescript.tsx"
+    "typescript.tsx",
+    "vue"
   ],
-  "tsserver.enableJavascript": false,
+  "tsserver.enableJavascript": true,
   "list.source.files.args": [
     "--hidden",
     "--files"

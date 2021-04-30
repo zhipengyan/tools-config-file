@@ -21,7 +21,10 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export N_NODE_MIRROR=https://npm.taobao.org/mirrors/node
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.cloud.tencent.com/homebrew-bottles
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+export NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
+export NVIM_COC_LOG_LEVEL=debug
+export BRICK_SERVER=https://test-brick.baijia.com
 
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
@@ -31,7 +34,7 @@ export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.cloud.tencent.com/homebrew-bottles
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-plugins=(git autojump ruby osx)
+plugins=(git autojump ruby osx kubectl)
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -65,7 +68,10 @@ alias gpsc='branch=`git symbolic-ref --short -q HEAD` && git push origin "${bran
 alias gdb='branch=`git symbolic-ref --short -q HEAD` && git checkout develop && git branch -D "${branch}" && gplc'
 alias gps='git push origin '
 alias gs='git status'
+# alias ls='nnn -de'
+alias ls='lsd'
 alias apache="sudo apachectl start"
+alias apacheStop="sudo apachectl stop"
 alias pon='export http_proxy=127.0.0.1:6152;export https_proxy=$http_proxy' 
 alias pons='export http_proxy=127.0.0.1:8123;export https_proxy=$http_proxy' 
 alias ponc='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891'
@@ -74,8 +80,12 @@ alias ssh@deploy="ssh yanzhipeng@139.219.0.67"
 alias ssh@idoc="ssh -p 2333  idoc@shimo.f3322.net"
 alias ssh@test="ssh test@172.16.20.168"
 alias ssh@doc="ssh yanzhipeng@172.16.20.102"
-alias gitLocal="git config --local user.name 'yanzhipeng' && git config --local user.email 'yanzhipeng@shimo.im'"
+alias gitLocal="git config --local user.name '颜志鹏' && git config --local user.email 'yanzhipeng@baijia.com'"
 alias gitGlobal="git config --global user.name 'zhipengyan' && git config --local user.email 'yanzhipeng2012@gmail.com'"
+alias sshbaijia="ssh -p 2222 yanzhipeng@jumpserver.baijia.com"
+alias kube-test="kubectl --kubeconfig ~/.kube/config-test -n whyy"
+alias kube-beta="kubectl --kubeconfig ~/.kube/config-beta -n whyy"
+alias kube-prod="kubectl --kubeconfig ~/.kube/config-prod -n whyy"
 
 [ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
 source ~/.zplug/init.zsh
@@ -109,3 +119,9 @@ unset __conda_setup
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# if [ -x "$(command -v kubectl)" ]; then
+#   source <(kubectl completion zsh)
+# fi
+
+# clear

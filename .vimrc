@@ -41,6 +41,8 @@ set noswapfile
 set noundofile
 set nowritebackup
 set t_Co=256
+" 一些性能优化
+set updatetime=300
 " set my leader
 let mapleader = ' '
 let g:mapleader = ' '
@@ -54,6 +56,11 @@ noremap <leader>yy "*Y
 inoremap jk <esc>
 cnoremap jk <esc>
 inoremap <esc> <nop>
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 " =====================================================================================
 " ================================== 基本设置结束 =======================================
 " =====================================================================================
@@ -86,8 +93,6 @@ if has('gui_running')
 endif
 " 跳转到上一个打开的 buffer
 nnoremap <c-6> :bp<cr>
-" 打开 buffer 列表
-map <leader>b :Buffers<CR>
 filetype plugin indent on    " required
 " =====================================================================================
 " ================================== 高级设置结束 =======================================
@@ -121,6 +126,9 @@ Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
+Plug 'sainnhe/sonokai'
+Plug 'pineapplegiant/spaceduck'
 
 " 代码目录
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -131,8 +139,11 @@ Plug 'ryanoasis/vim-devicons'
 " 首屏导航
 Plug 'mhinz/vim-startify'
 " 状态栏
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+" Plug 'ap/vim-buftabline'
+Plug 'mengelbrecht/lightline-bufferline'
 " 文件快速导航
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -172,6 +183,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 " prettier
 " Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'sbdchd/neoformat'
+" 写作工具
+Plug 'junegunn/goyo.vim'
 
 " ================================= 语言类型支持开始 =====================================
 " javascript 语言相关
@@ -203,6 +216,8 @@ Plug 'racer-rust/vim-racer'
 " jenkins
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'vim-scripts/groovyindent-unix'
+" vue
+Plug 'posva/vim-vue'
 " ================================ 语言类型支持结束 ======================================
 
 " 生成代码截图
@@ -226,10 +241,12 @@ call plug#end()
 " =============================
 set termguicolors
 " colorscheme PaperColor
-colorscheme OceanicNext
+" colorscheme OceanicNext
 " colorscheme onedark
 " let ayucolor="mirage" " for mirage version of theme
 " colorscheme ayu
+" colorscheme onehalfdark
+colorscheme spaceduck
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
@@ -247,9 +264,15 @@ let g:nnn#set_default_mappings = 0
 let g:lf_map_keys = 0
 " 禁用 ranger 的默认映射
 let g:ranger_map_keys = 0
+" let g:floaterm_wintype = 'vsplit'
+let g:floaterm_width = 1.0
+let g:floaterm_height = 1.0
+let g:floaterm_opener = 'edit'
+hi FloatermBorder guibg=NONE guifg=orange
 map <leader><leader> :FloatermNew nnn -H<CR>
 map <leader>n :FloatermNew nnn -H %:p:h<CR>
 map <leader>f :FloatermNew fzf<CR>
+map <leader>b :Buffers<CR>
 map <leader>c :FloatermNew<CR>
 " =============================
 " NerdTree configure
@@ -303,6 +326,67 @@ let g:startify_lists = [
   \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
   \ ]
 " =============================
+" lineline configure
+" https://github.com/itchyny/lightline.vim
+" =============================
+set showtabline=2
+let g:lightline = {
+      \ 'colorscheme': 'spaceduck',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'tabline': {
+      \   'left': [ ['buffers'] ],
+      \   'right': [ [] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
+      \   'filename': 'LightlineFilename',
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers'
+      \ },
+      \ 'component_type': {
+      \   'buffers': 'tabsel'
+      \ },
+      \ }
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#unicode_symbols = 1
+let g:lightline#bufferline#show_number = 2
+" let g:lightline#bufferline#number_map = {
+" \ 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴',
+" \ 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹'}
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+nmap <Leader>d1 <Plug>lightline#bufferline#delete(1)
+nmap <Leader>d2 <Plug>lightline#bufferline#delete(2)
+nmap <Leader>d3 <Plug>lightline#bufferline#delete(3)
+nmap <Leader>d4 <Plug>lightline#bufferline#delete(4)
+nmap <Leader>d5 <Plug>lightline#bufferline#delete(5)
+nmap <Leader>d6 <Plug>lightline#bufferline#delete(6)
+nmap <Leader>d7 <Plug>lightline#bufferline#delete(7)
+nmap <Leader>d8 <Plug>lightline#bufferline#delete(8)
+nmap <Leader>d9 <Plug>lightline#bufferline#delete(9)
+nmap <Leader>d0 <Plug>lightline#bufferline#delete(10)
+" let g:lightline#bufferline#enable_nerdfont = 1
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+" =============================
 " Airline configure
 " https://github.com/vim-airline/vim-airline
 " =============================
@@ -337,8 +421,8 @@ nnoremap <leader>p :GFiles<cr>
 " =============================
 " Ag configure
 " =============================
-nmap <leader>/ :tab split<CR>:Ag ""<left>
-nmap <leader>A :tab split<CR>:Ag <C-r><C-w><CR>
+nmap <leader>/ :tab split<CR>:Rg  <left>
+nmap <leader>A :tab split<CR>:Rg <C-r><C-w><CR>
 let g:ag_prg = 'rg --line-number --vimgrep --column --smart-case --colors "line:style:bold" --hidden --follow --glob "!.git/*"'
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
@@ -371,7 +455,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " nnoremap <silent> <space>f  :<C-u>CocList files<cr>
-nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
+" nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
 nnoremap <silent> <space>g  :<C-u>CocList grep<cr>
 nnoremap <silent> <space>w  :<C-u>CocList words<cr>
 
