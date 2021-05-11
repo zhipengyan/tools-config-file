@@ -32,14 +32,14 @@ export BRICK_SERVER=https://test-brick.baijia.com
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 plugins=(git autojump ruby osx kubectl)
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -81,7 +81,7 @@ alias ssh@idoc="ssh -p 2333  idoc@shimo.f3322.net"
 alias ssh@test="ssh test@172.16.20.168"
 alias ssh@doc="ssh yanzhipeng@172.16.20.102"
 alias gitLocal="git config --local user.name '颜志鹏' && git config --local user.email 'yanzhipeng@baijia.com'"
-alias gitGlobal="git config --global user.name 'zhipengyan' && git config --local user.email 'yanzhipeng2012@gmail.com'"
+alias gitGlobal="git config --global user.name 'zhipengyan' && git config --global user.email 'yanzhipeng2012@gmail.com'"
 alias sshbaijia="ssh -p 2222 yanzhipeng@jumpserver.baijia.com"
 alias kube-test="kubectl --kubeconfig ~/.kube/config-test -n whyy"
 alias kube-beta="kubectl --kubeconfig ~/.kube/config-beta -n whyy"
@@ -99,7 +99,7 @@ zplug 'romkatv/powerlevel10k', use:powerlevel10k.zsh-theme, from:github, as:them
 zplug "zsh-users/zsh-syntax-highlighting", use:zsh-syntax-highlighting.zsh, from:github
 zplug "zsh-users/zsh-autosuggestions", use:zsh-autosuggestions.zsh
 zplug "lukechilds/zsh-better-npm-completion", defer:2
-zplug load --verbose
+zplug load --verbose >> /dev/null
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
