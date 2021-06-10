@@ -129,6 +129,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'sainnhe/sonokai'
 Plug 'pineapplegiant/spaceduck'
+Plug 'sainnhe/everforest'
 
 " 代码目录
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -226,6 +227,8 @@ Plug 'posva/vim-vue'
 " Plug 'wakatime/vim-wakatime'
 " MD 生成 Slide
 Plug 'dhruvasagar/vim-marp'
+" 高亮选中的相同内容
+Plug 'RRethy/vim-illuminate'
 
 call plug#end()
 
@@ -246,7 +249,8 @@ set termguicolors
 " let ayucolor="mirage" " for mirage version of theme
 " colorscheme ayu
 " colorscheme onehalfdark
-colorscheme spaceduck
+" colorscheme spaceduck
+colorscheme everforest
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
@@ -331,7 +335,7 @@ let g:startify_lists = [
 " =============================
 set showtabline=2
 let g:lightline = {
-      \ 'colorscheme': 'spaceduck',
+      \ 'colorscheme': 'everforest',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
