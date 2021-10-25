@@ -8,10 +8,12 @@ fi
 # Path to your oh-my-zsh installation.
 export TERM="xterm-256color"
 export ZSH=$HOME/.oh-my-zsh
+export GEM_HOME="$HOME/.gem"
 export grpc_node_binary_host_mirror=http://npm.taobao.org/mirrors
 export PATH=$PATH:~/anaconda3/bin
 export EDITOR=nvim
 export PATH=$PATH:~/.emacs.d/bin
+export PATH=$PATH:~/.gem/bin
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
 export LDFLAGS="-L/usr/local/opt/openssl/lib";
 export CPPFLAGS="-I/usr/local/opt/openssl/include";
@@ -20,7 +22,7 @@ export LESSCHARSET=utf-8
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
 export N_NODE_MIRROR=https://npm.taobao.org/mirrors/node
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$PATH:$(npm bin -g)"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
 export NVIM_COC_LOG_LEVEL=debug
@@ -86,6 +88,9 @@ alias sshbaijia="ssh -p 2222 yanzhipeng@jumpserver.baijia.com"
 alias kube-test="kubectl --kubeconfig ~/.kube/config-test -n whyy"
 alias kube-beta="kubectl --kubeconfig ~/.kube/config-beta -n whyy"
 alias kube-prod="kubectl --kubeconfig ~/.kube/config-prod -n whyy"
+alias k9s-test="k9s --kubeconfig ~/.kube/config-test -n whyy"
+alias k9s-beta="k9s --kubeconfig ~/.kube/config-beta -n whyy"
+alias k9s-prod="k9s --kubeconfig ~/.kube/config-prod -n whyy"
 
 [ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
 source ~/.zplug/init.zsh
@@ -125,3 +130,5 @@ unset __conda_setup
 # fi
 
 # clear
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

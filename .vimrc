@@ -14,7 +14,7 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " 中文乱码问题
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 " 共享系统剪贴板
-" set clipboard=unnamed
+set clipboard=unnamedplus
 set hidden
 set number "显示行号
 set ignorecase smartcase " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
@@ -130,6 +130,7 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'sainnhe/sonokai'
 Plug 'pineapplegiant/spaceduck'
 Plug 'sainnhe/everforest'
+Plug 'arcticicestudio/nord-vim'
 
 " 代码目录
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -186,6 +187,12 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sbdchd/neoformat'
 " 写作工具
 Plug 'junegunn/goyo.vim'
+" 跳转工具
+" Plug 'justinmk/vim-sneak'
+" 定位工具
+Plug 'unblevable/quick-scope'
+" 颜色显示
+Plug 'norcalli/nvim-colorizer.lua'
 
 " ================================= 语言类型支持开始 =====================================
 " javascript 语言相关
@@ -250,7 +257,8 @@ set termguicolors
 " colorscheme ayu
 " colorscheme onehalfdark
 " colorscheme spaceduck
-colorscheme everforest
+" colorscheme everforest
+colorscheme nord
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
@@ -335,7 +343,7 @@ let g:startify_lists = [
 " =============================
 set showtabline=2
 let g:lightline = {
-      \ 'colorscheme': 'everforest',
+      \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -474,8 +482,24 @@ let g:EasyMotion_leader_key=','
 vnoremap <F5> :CarbonNowSh<CR>
 
 " =============================
-" EasyMotinon configure
+" sneak configure
+" https://github.com/justinmk/vim-sneak
 " =============================
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+let g:sneak#label = 1
+" =============================
+" Neoformat configure
+" =============================
+let g:neoformat_javascript_eslint = { 'exe': 'eslint' }
+let g:neoformat_enabled_javascript = ['eslint']
+let g:neoformat_typescript_eslint = { 'exe': 'eslint' }
+let g:neoformat_enabled_typescript = ['eslint']
+let g:neoformat_javascriptreact_eslint = { 'exe': 'eslint' }
+let g:neoformat_enabled_javascriptreact = ['eslint']
+let g:neoformat_typescriptreact_eslint = { 'exe': 'eslint' }
+let g:neoformat_enabled_typescriptreact = ['eslint']
+autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
 nmap -- :Neoformat prettier<CR>
 
 command! PP !npx prettier --write %
