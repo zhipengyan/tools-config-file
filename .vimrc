@@ -41,6 +41,8 @@ set noswapfile
 set noundofile
 set nowritebackup
 set t_Co=256
+set foldmethod=syntax
+set foldlevel=10
 " 一些性能优化
 set updatetime=300
 " set my leader
@@ -229,13 +231,15 @@ Plug 'posva/vim-vue'
 " ================================ 语言类型支持结束 ======================================
 
 " 生成代码截图
-" Plug 'kristijanhusak/vim-carbon-now-sh'
+Plug 'kristijanhusak/vim-carbon-now-sh'
 " 统计写代码时长
 " Plug 'wakatime/vim-wakatime'
 " MD 生成 Slide
 Plug 'dhruvasagar/vim-marp'
 " 高亮选中的相同内容
 Plug 'RRethy/vim-illuminate'
+Plug 'alvan/vim-closetag'
+Plug 'tmhedberg/simpylfold'
 
 call plug#end()
 
@@ -253,7 +257,7 @@ set termguicolors
 " colorscheme PaperColor
 " colorscheme OceanicNext
 " colorscheme onedark
-" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark" " for mirage version of theme
 " colorscheme ayu
 " colorscheme onehalfdark
 " colorscheme spaceduck
@@ -470,6 +474,7 @@ nmap <silent> gr <Plug>(coc-references)
 " nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
 nnoremap <silent> <space>g  :<C-u>CocList grep<cr>
 nnoremap <silent> <space>w  :<C-u>CocList words<cr>
+nnoremap <silent> <space>r  :<C-u>CocListResume<cr>
 
 " =============================
 " EasyMotinon configure
@@ -503,3 +508,8 @@ autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
 nmap -- :Neoformat prettier<CR>
 
 command! PP !npx prettier --write %
+
+" =============================
+" simpylfold configure
+" =============================
+let g:SimpylFold_docstring_preview = 1

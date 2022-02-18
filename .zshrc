@@ -36,7 +36,7 @@ export BRICK_SERVER=https://test-brick.baijia.com
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-plugins=(git autojump ruby osx kubectl)
+plugins=(git autojump ruby macos kubectl)
 
 # User configuration
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -132,3 +132,6 @@ unset __conda_setup
 # clear
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export PNPM_HOME="/Users/yzp/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
