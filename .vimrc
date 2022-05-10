@@ -42,7 +42,7 @@ set noundofile
 set nowritebackup
 set t_Co=256
 set foldmethod=syntax
-set foldlevel=10
+set foldlevel=20
 " 一些性能优化
 set updatetime=300
 " set my leader
@@ -153,6 +153,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " 全文搜索工具
 Plug 'rking/ag.vim'
+Plug 'gevann/vim-rg'
 " 异步进程管理
 Plug 'roxma/nvim-yarp'
 " 语言服务器
@@ -192,9 +193,10 @@ Plug 'junegunn/goyo.vim'
 " 跳转工具
 " Plug 'justinmk/vim-sneak'
 " 定位工具
-Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope'
 " 颜色显示
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'lilydjwg/colorizer'
 
 " ================================= 语言类型支持开始 =====================================
 " javascript 语言相关
@@ -240,6 +242,7 @@ Plug 'dhruvasagar/vim-marp'
 Plug 'RRethy/vim-illuminate'
 Plug 'alvan/vim-closetag'
 Plug 'tmhedberg/simpylfold'
+Plug 'ahonn/vim-fileheader'
 
 call plug#end()
 
@@ -326,13 +329,6 @@ let g:airline#extensions#tabline#show_tabs = 1
 nmap <leader>h :Startify<CR>
 let g:startify_session_dir = '~/.vim/session'
 let g:startify_bookmarks = [
-  \ '~/Code/personal/yunduo/package.json',
-  \ '~/Code/shimo/shark/package.json',
-  \ '~/code/shimo/eagle-develop/package.json',
-  \ '~/Code/shimo/docs-straight-out/docs2html/package.json',
-  \ '~/Code/shimo/svc-docssr/package.json',
-  \ '~/Code/personal/docs-debugger/package.json',
-  \ '~/Code/shimo/doc-doctor/package.json',
   \ '~/.vimrc',
   \ ]
 let g:startify_lists = [
@@ -513,3 +509,35 @@ command! PP !npx prettier --write %
 " simpylfold configure
 " =============================
 let g:SimpylFold_docstring_preview = 1
+
+" =============================
+" fileheader configure
+" =============================
+let g:fileheader_auto_add = 1
+let g:fileheader_templates_map = {
+  \ 'yaml': [
+     \ '@Author: {{author}}',
+     \ '@Description:',
+     \ '@Date: {{created_date}}'
+     \ ],
+  \ 'typescript': [
+     \ '@Author: {{author}}',
+     \ '@Description:',
+     \ '@Date: {{created_date}}'
+     \ ],
+  \ 'typescriptreact': [
+     \ '@Author: {{author}}',
+     \ '@Description:',
+     \ '@Date: {{created_date}}'
+     \ ],
+  \ 'javascript': [
+     \ '@Author: {{author}}',
+     \ '@Description:',
+     \ '@Date: {{created_date}}'
+     \ ],
+  \ 'javascriptreact': [
+     \ '@Author: {{author}}',
+     \ '@Description:',
+     \ '@Date: {{created_date}}'
+     \ ]
+  \ }
