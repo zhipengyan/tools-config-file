@@ -262,7 +262,7 @@ set termguicolors
 " colorscheme onehalfdark
 " colorscheme spaceduck
 " colorscheme everforest
-colorscheme nord
+silent! colorscheme nord
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
