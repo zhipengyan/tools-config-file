@@ -7,6 +7,8 @@
     "typescript.tsx",
     "vue"
   ],
+  "diagnostic.checkCurrentLine": true,
+  "eslint.autoFixOnSave": true,
   "tsserver.enableJavascript": true,
   "list.source.files.args": [
     "--hidden",

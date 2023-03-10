@@ -9,11 +9,7 @@ fi
 export TERM="xterm-256color"
 export ZSH=$HOME/.oh-my-zsh
 export GEM_HOME="$HOME/.gem"
-export grpc_node_binary_host_mirror=http://npm.taobao.org/mirrors
-export PATH=$PATH:~/anaconda3/bin
 export EDITOR=nvim
-export PATH=$PATH:~/.emacs.d/bin
-export PATH=$PATH:~/.gem/bin
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
 export LDFLAGS="-L/usr/local/opt/openssl/lib";
 export CPPFLAGS="-I/usr/local/opt/openssl/include";
@@ -21,12 +17,18 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export LESSCHARSET=utf-8
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
-export N_NODE_MIRROR=https://npm.taobao.org/mirrors/node
-export PATH="$PATH:$(npm bin -g)"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
 export NVIM_COC_LOG_LEVEL=debug
 export BRICK_SERVER=https://test-brick.baijia.com
+export PATH=$PATH:~/.emacs.d/bin
+export PATH=$PATH:~/.gem/bin
+export PATH=$PATH:~/anaconda3/bin
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export ANDROID_HOME=/Users/$USER/Library/Android/sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+export PATH="${HOME}/.pyenv/shims:${PATH}"
+export PATH="$PATH:$(npm bin -g)"
 
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
@@ -39,7 +41,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 plugins=(git autojump ruby macos kubectl)
 
 # User configuration
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -67,11 +68,11 @@ alias gpl='git pull origin '
 alias gpld='git pull origin develop'
 alias gplc='branch=`git symbolic-ref --short -q HEAD` && git pull origin "${branch}"'
 alias gpsc='branch=`git symbolic-ref --short -q HEAD` && git push origin "${branch}"'
-alias gdb='branch=`git symbolic-ref --short -q HEAD` && git checkout develop && git branch -D "${branch}" && gplc'
+alias gdb='branch="${`git symbolic-ref --short -q HEAD`}" && git checkout "${target}" && gplc && git branch -D "${branch}" && git checkout -b "${branch}"'
 alias gps='git push origin '
 alias gs='git status'
 # alias ls='nnn -de'
-alias ls='lsd'
+# alias ls='lsd'
 alias apache="sudo apachectl start"
 alias apacheStop="sudo apachectl stop"
 alias pon='export http_proxy=127.0.0.1:6152;export https_proxy=$http_proxy' 
@@ -82,15 +83,15 @@ alias ssh@deploy="ssh yanzhipeng@139.219.0.67"
 alias ssh@idoc="ssh -p 2333  idoc@shimo.f3322.net"
 alias ssh@test="ssh test@172.16.20.168"
 alias ssh@doc="ssh yanzhipeng@172.16.20.102"
-alias gitLocal="git config --local user.name '颜志鹏' && git config --local user.email 'yanzhipeng@baijia.com'"
 alias gitGlobal="git config --global user.name 'zhipengyan' && git config --global user.email 'yanzhipeng2012@gmail.com'"
-alias sshbaijia="ssh -p 2222 yanzhipeng@jumpserver.baijia.com"
 alias kube-test="kubectl --kubeconfig ~/.kube/config-test -n whyy"
 alias kube-beta="kubectl --kubeconfig ~/.kube/config-beta -n whyy"
 alias kube-prod="kubectl --kubeconfig ~/.kube/config-prod -n whyy"
 alias k9s-test="k9s --kubeconfig ~/.kube/config-test -n whyy"
 alias k9s-beta="k9s --kubeconfig ~/.kube/config-beta -n whyy"
 alias k9s-prod="k9s --kubeconfig ~/.kube/config-prod -n whyy"
+alias tnpm="npm --registry http://mirrors.tencent.com/npm/"
+alias tpnpm="pnpm --registry http://mirrors.tencent.com/npm/"
 
 [ ! -d ~/.zplug ] && git clone https://github.com/zplug/zplug ~/.zplug
 source ~/.zplug/init.zsh
@@ -135,3 +136,18 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export PNPM_HOME="/Users/yzp/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/aikenyan/Code/workspace/awesome-code/packages/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/aikenyan/Code/workspace/awesome-code/packages/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/aikenyan/Code/workspace/awesome-code/packages/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/aikenyan/Code/workspace/awesome-code/packages/serverless/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/aikenyan/Code/workspace/awesome-code/packages/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/aikenyan/Code/workspace/awesome-code/packages/serverless/node_modules/tabtab/.completions/slss.zsh
+
+# pnpm
+export PNPM_HOME="/Users/aikenyan/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end

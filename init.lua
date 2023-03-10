@@ -56,9 +56,10 @@ local focus_mash = {"ctrl"}
 
 -------------------- launch ----------------------
 local launch_mash = {"cmd"}
-hs.hotkey.bind(launch_mash, "0", function() ext.app.forceLaunchOrFocus("灵犀") end)
+hs.hotkey.bind(launch_mash, "0", function() ext.app.forceLaunchOrFocus("企业微信") end)
 hs.hotkey.bind(launch_mash, "1", function() ext.app.forceLaunchOrFocus("Finder") end)
-hs.hotkey.bind(launch_mash, "2", function() ext.app.forceLaunchOrFocus("2Do") end)
+-- hs.hotkey.bind(launch_mash, "2", function() ext.app.forceLaunchOrFocus("2Do") end)
+hs.hotkey.bind(launch_mash, "2", function() ext.app.forceLaunchOrFocus("TickTick") end)
 hs.hotkey.bind(launch_mash, "3", function() ext.app.forceLaunchOrFocus("Google Chrome") end)
 -- hs.hotkey.bind(launch_mash, "4", function() ext.app.forceLaunchOrFocus("vimr") end)
 hs.hotkey.bind(launch_mash, "4", function() ext.app.forceLaunchOrFocus("alacritty") end)
@@ -68,10 +69,12 @@ hs.hotkey.bind(launch_mash, "4", function() ext.app.forceLaunchOrFocus("alacritt
 -- hs.hotkey.bind(launch_mash, "5", function() ext.app.forceLaunchOrFocus("kitty") end)
 hs.hotkey.bind(launch_mash, "5", function() ext.app.forceLaunchOrFocus("alacritty") end)
 hs.hotkey.bind(launch_mash, "6", function() ext.app.forceLaunchOrFocus("Visual Studio Code") end)
-hs.hotkey.bind(launch_mash, "7", function() ext.app.forceLaunchOrFocus("Preview") end)
+-- hs.hotkey.bind(launch_mash, "7", function() ext.app.forceLaunchOrFocus("Preview") end)
+hs.hotkey.bind(launch_mash, "7", function() ext.app.forceLaunchOrFocus("Notion") end)
 -- hs.hotkey.bind(launch_mash, "8", function() ext.app.forceLaunchOrFocus("NeteaseMusic") end)
 hs.hotkey.bind(launch_mash, "8", function() ext.app.forceLaunchOrFocus("企业微信") end)
 hs.hotkey.bind(launch_mash, "9", function() ext.app.forceLaunchOrFocus("WeChat") end)
+hs.hotkey.bind(launch_mash, "escape", function() hs.eventtap.keyStroke({'cmd'}, '~', 1000) end)
 
 -------------------- layout ----------------------
 local layout_mash = {"ctrl", "alt", "cmd"}
@@ -129,6 +132,10 @@ function ext.win.focus(direction)
   }
 
   hs.window[functions[direction]](win)
+end
+
+function ext.app.switchCurrentAppWindow ()
+  keyCode('~', {'cmd'})()
 end
 
 function ext.app.forceLaunchOrFocus(appName)

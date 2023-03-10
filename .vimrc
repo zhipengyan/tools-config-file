@@ -124,7 +124,7 @@ Plug 'sainnhe/vim-color-forest-night'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'chriskempson/base16-vim'
 Plug 'mhartington/oceanic-next'
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 Plug 'joshdick/onedark.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -133,6 +133,7 @@ Plug 'sainnhe/sonokai'
 Plug 'pineapplegiant/spaceduck'
 Plug 'sainnhe/everforest'
 Plug 'arcticicestudio/nord-vim'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
 
 " 代码目录
 " Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -173,12 +174,12 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-commentary'
 " git 工具集
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 " https://github.com/tpope/vim-eunuch SudoWrite Delete Chmod
 Plug 'tpope/vim-eunuch'
 " 两边补齐符号
 Plug 'tpope/vim-surround'
 " 快速定位
-Plug 'Lokaltog/vim-easymotion'
 " 选区助手
 Plug 'terryma/vim-expand-region'
 " 选区复制后高亮
@@ -190,6 +191,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'sbdchd/neoformat'
 " 写作工具
 Plug 'junegunn/goyo.vim'
+" buffer 管理
+Plug 'jlanzarotta/bufexplorer'
 " 跳转工具
 " Plug 'justinmk/vim-sneak'
 " 定位工具
@@ -197,6 +200,7 @@ Plug 'junegunn/goyo.vim'
 " 颜色显示
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'lilydjwg/colorizer'
+Plug 'liuchengxu/vista.vim'
 
 " ================================= 语言类型支持开始 =====================================
 " javascript 语言相关
@@ -235,7 +239,7 @@ Plug 'posva/vim-vue'
 " 生成代码截图
 Plug 'kristijanhusak/vim-carbon-now-sh'
 " 统计写代码时长
-" Plug 'wakatime/vim-wakatime'
+Plug 'wakatime/vim-wakatime'
 " MD 生成 Slide
 Plug 'dhruvasagar/vim-marp'
 " 高亮选中的相同内容
@@ -265,7 +269,8 @@ set termguicolors
 " colorscheme onehalfdark
 " colorscheme spaceduck
 " colorscheme everforest
-silent! colorscheme nord
+" silent! colorscheme nord
+silent! colorscheme onedark
 if has('gui_running')
 	set background=dark
 elseif has('nvim')
@@ -291,7 +296,7 @@ hi FloatermBorder guibg=NONE guifg=orange
 map <leader><leader> :FloatermNew nnn -H<CR>
 map <leader>n :FloatermNew nnn -H %:p:h<CR>
 map <leader>f :FloatermNew fzf<CR>
-map <leader>b :Buffers<CR>
+" map <leader>b :Buffers<CR>
 map <leader>c :FloatermNew<CR>
 " =============================
 " NerdTree configure
@@ -343,10 +348,10 @@ let g:startify_lists = [
 " =============================
 set showtabline=2
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ]
       \ },
       \ 'tabline': {
       \   'left': [ ['buffers'] ],
@@ -355,6 +360,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
       \   'filename': 'LightlineFilename',
+      \   'method': 'NearestMethodOrFunction',
       \ },
       \ 'component_expand': {
       \   'buffers': 'lightline#bufferline#buffers'
@@ -402,7 +408,7 @@ endfunction
 " Airline configure
 " https://github.com/vim-airline/vim-airline
 " =============================
-set laststatus=1
+set laststatus=2
 " let g:airline_theme = 'base16'
 " let g:airline_theme = 'oceanicnext'
 let g:airline_theme = 'onedark'
@@ -444,14 +450,20 @@ let g:ag_highlight=1
 " =============================
 " tab 键切换补全的选项
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
@@ -471,11 +483,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> <space>g  :<C-u>CocList grep<cr>
 nnoremap <silent> <space>w  :<C-u>CocList words<cr>
 nnoremap <silent> <space>r  :<C-u>CocListResume<cr>
+" Run jest for current project
+command! -nargs=0 Jest :call  CocAction('runCommand', 'jest.projectTest')
+" Run jest for current file
+command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['%'])
 
-" =============================
-" EasyMotinon configure
-" =============================
-let g:EasyMotion_leader_key=','
 "=============================
 " vim-carbon-now-sh
 " https://github.com/kristijanhusak/vim-carbon-now-sh
@@ -503,7 +515,7 @@ let g:neoformat_enabled_typescriptreact = ['eslint']
 autocmd BufWritePre,TextChanged,InsertLeave *.js Neoformat
 nmap -- :Neoformat prettier<CR>
 
-command! PP !npx prettier --write %
+command! PP :CocCommand prettier.forceFormatDocument
 
 " =============================
 " simpylfold configure
