@@ -239,7 +239,7 @@ Plug 'posva/vim-vue'
 " 生成代码截图
 Plug 'kristijanhusak/vim-carbon-now-sh'
 " 统计写代码时长
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 " MD 生成 Slide
 Plug 'dhruvasagar/vim-marp'
 " 高亮选中的相同内容
